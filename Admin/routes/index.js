@@ -18,4 +18,20 @@ router.get('/login',function(req,res,next){
 router.get('/product-list',function(req,res,next){
   res.render('product_list',{title:'Product',layout:'Index_Layout'});
 });
+router.post('/product-list',function(req,res,next){
+  res.render('product_list',{title:'Product',layout:'Index_Layout'});
+});
+
+router.get('/product-detail',function(req,res,next){
+  res.render('product_detail',{title:'Product Detail',layout:'Index_Layout'});
+});
+
+
+router.get('/add-product',function(req,res,next){
+  res.render('product_add',{title:'Add Product',layout:'Index_Layout'});
+});
+
+router.get('/edit-product',function(req,res,next){
+  res.render('product_edit',{title:'Edit Product',layout:'Index_Layout'});
+});
 module.exports = router;

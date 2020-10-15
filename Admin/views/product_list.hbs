@@ -34,7 +34,7 @@
                 <div class="product-status-wrap">
                     <h4>Products List</h4>
                     <div class="add-product">
-                        <a href="product-edit.html">Add Product</a>
+                        <a href="/add-product">Add Product</a>
                     </div>
                     <table>
                         <tr>
@@ -48,37 +48,70 @@
                             <th>Setting</th>
                         </tr>
                         <tr>
-                            <td><img src="img/new-product/5-small.jpg" alt="" /></td>
-                            <td>Product Title 1</td>
-                            <td>
-                                <button class="pd-setting">Active</button>
-                            </td>
-                            <td>50</td>
-                            <td>$750</td>
-                            <td>Out Of Stock</td>
-                            <td>$15</td>
-                            <td>
-                                <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i
-                                        class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i
-                                        class="fa fa-trash-o" aria-hidden="true"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
                             <td><img src="img/new-product/6-small.jpg" alt="" /></td>
                             <td>Product Title 2</td>
                             <td>
-                                <button class="ps-setting">Paused</button>
+                                <button class="ps-setting" data-toggle="modal" title="Trash"
+                                    data-target="#statusModel">Paused</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="statusModel" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document"
+                                        style="color: black;">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Thông báo</h5>
+                                            </div>
+                                            <div class="text-dark modal-body">
+                                                <form method="POST" action="/product-list">
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <input class="pd-setting btn-lg" type="submit" value="Active" style="width: 100%;">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input class="ps-setting" type="submit" value="Paused" style="width: 100%;">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input class="ds-setting" type="submit" value="Disabled" style="width: 100%;">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td>60</td>
                             <td>$1020</td>
                             <td>In Stock</td>
                             <td>$17</td>
                             <td>
-                                <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i
-                                        class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i
-                                        class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                
+                                <a href="/edit-product"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o"
+                                            aria-hidden="true"></i></button></a>
+                                <button data-toggle="modal" title="Trash" class="pd-setting-ed"
+                                    data-target="#exampleModalCenter"><i class="fa fa-trash-o"
+                                        aria-hidden="true"></i></button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document"
+                                        style="color: black;">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Thông báo</h5>
+                                            </div>
+                                            <div class="text-dark modal-body">
+                                                <p>Bạn có chắc chắn muốn xóa sản phẩm không?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary">Yes</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">No</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>

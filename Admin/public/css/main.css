@@ -15,7 +15,9 @@ html {
     font-size: 1em;
     line-height: 1.4;
 }
-
+a{
+    color: inherit;
+}
 /*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301
@@ -218,12 +220,13 @@ textarea {
         box-shadow: none !important;
         text-shadow: none !important;
     }
-
+    a{
+        color: inherit;
+    }
     a,
     a:visited {
         text-decoration: underline;
     }
-
     a[href]:after {
         content: " (" attr(href) ")";
     }
