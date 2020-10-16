@@ -46,10 +46,11 @@
                             <th>Stock</th>
                             <th>Price</th>
                             <th>Setting</th>
+                            <th hidden>Id</th>
                         </tr>
                         <tr>
                             <td><img src="img/new-product/6-small.jpg" alt="" /></td>
-                            <td>Product Title 2</td>
+                            <td> Product Title 2</td>
                             <td>
                                 <button class="ps-setting" data-toggle="modal" title="Trash"
                                     data-target="#statusModel">Paused</button>
@@ -113,6 +114,12 @@
                                     </div>
                                 </div>
                             </td>
+                            <td>
+                                <form action="/product-detail">
+                                    <button class="btn btn-default" type="submit">Xem chi tiết</button>
+                                </form>
+                            </td>
+                            <th hidden>Id</th>
                         </tr>
                         <tr>
                             <td><img src="img/new-product/7-small.jpg" alt="" /></td>
