@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('express-handlebars')
+var mongoose = require('mongoose')
+var mongodb = require('mongodb')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
@@ -13,6 +16,9 @@ var app = express();
 
 // view engine setup
 app.engine('hbs',hbs({extname:'hbs',defaultLayout:'Default_Layout',layoutDir:__dirname+'/views/layouts/'}))
+app.engine('handlebars', hbs({
+  handlebars: allowInsecurePrototypeAccess(hbs)
+}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static('public'))

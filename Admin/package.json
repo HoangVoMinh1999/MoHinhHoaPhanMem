@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -13,6 +14,8 @@
     "express-handlebars": "^5.1.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.9",
     "morgan": "~1.9.1"
   },
   "devDependencies": {
