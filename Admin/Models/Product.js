@@ -13,7 +13,6 @@ mongoose.connect(uri, function (err, res) {
 });
 
 var ProductSchema = new mongoose.Schema({
-  Id: String,
   Name: String,
   Brand: String,
   Price: Number,
@@ -21,6 +20,8 @@ var ProductSchema = new mongoose.Schema({
   ProductSales: Number,
   Status: String,
   Stock: String,
+  Note : String,
+  MaxSize: String,
   IsDeleted: Boolean,
 })
 var Product = mongoose.model('Product', ProductSchema, 'Products')

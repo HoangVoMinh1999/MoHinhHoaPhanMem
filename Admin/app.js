@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('express-handlebars')
+var Handlebars = require('handlebars')
 var mongoose = require('mongoose')
 var mongodb = require('mongodb')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
@@ -15,13 +16,14 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // view engine setup
-app.engine('hbs',hbs({extname:'hbs',defaultLayout:'Default_Layout',layoutDir:__dirname+'/views/layouts/'}))
 app.engine('handlebars', hbs({
-  handlebars: allowInsecurePrototypeAccess(hbs)
+  handlebars: allowInsecurePrototypeAccess(Handlebars)
 }));
+app.engine('hbs',hbs({extname:'hbs',defaultLayout:'Default_Layout',layoutDir:__dirname+'/views/layouts/',    runtimeOptions: {allowProtoPropertiesByDefault: true, allowProtoMethodsByDefault: true}}))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static('public'))
+
 
 app.use(logger('dev'));
 app.use(express.json());

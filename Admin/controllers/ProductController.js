@@ -1,6 +1,7 @@
 require('dotenv').config()
 var ProductModel = require('../Models/Product')
 var mongoose = require('mongoose');
+const { report } = require('../app');
 
 const MongoClient = require('mongodb').MongoClient
 var uri = process.env.DB_LOCALHOST
@@ -41,14 +42,15 @@ exports.ShowProducts = async function (req, res, next) {
 }
 exports.InsertNewProduct = async function (req, res, next) {
     var newItem = new Product({
-        Id: new mongoose.Types.ObjectId(),
         Name: req.body.Name,
         Brand: req.body.Brand,
         Price: req.body.Price,
         Quantity: req.body.Quantity,
         ProductSales: 0,
+        MaxSize:req.body.MaxSize,
         Status: "Active",
         Stock: "In Stock",
+        Note:req.body.Note != null ? req.body.Note : "",
         IsDeleted: false
     })
     newItem.save(function (err, result) {
@@ -56,5 +58,26 @@ exports.InsertNewProduct = async function (req, res, next) {
         console.log(result)
     })
     await res.render('product_add', { title: 'Add Product', layout: 'Index_Layout' });
+}
 
+exports.ShowProductBy_id = async function(req,res,next){
+    var query = mongoose.Types.ObjectId(req.query._id)
+    var data = []
+    Product.findById(query).lean().exec(function(err,result){
+        if (err) throw err
+        let item = new Product({
+            Name: result.Name,
+            Brand: result.Brand,
+            Price: result.Price,
+            Quantity: result.Quantity,
+            ProductSales: result.ProductSales,
+            MaxSize:result.MaxSize,
+            Status: result.Status,
+            Stock: result.Stock,
+            Note:req.body.Note != null ? req.body.Note : "Chưa có thông tin ghi chú",
+        })
+        data.push(item)
+        console.log(data)
+    })
+    await res.render('product_detail', { title: 'Detail', layout: 'Index_Layout',data:data });
 }

@@ -39,8 +39,9 @@
                             </ul>
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                            {{#each data}}
                             <div class="single-product-details res-pro-tb">
-                                <h1>Product ITEM TITLE</h1>
+                                <h1>{{this.Name}}</h1>
                                 <span class="single-pro-star">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -49,8 +50,7 @@
                                     <i class="fa fa-star"></i>
                                 </span>
                                 <div class="single-pro-price">
-                                    <span class="single-regular">$150.00</span><span
-                                        class="single-old"><del>$20.00</del></span>
+                                    <span class="single-regular">{{this.Price}} VND</span>
                                 </div>
                                 <div class="single-pro-size">
                                     <h6>Size</h6>
@@ -63,42 +63,20 @@
                                             class="yellow"></span> <span class="black"></span> <span
                                             class="white"></span>
                                     </div>
-                                    <div class="color-quality">
-                                        <h4>Quality</h4>
-                                        <div class="quantity">
-                                            <div class="pro-quantity-changer">
-                                                <input type="text" value="1" />
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="clear"></div>
                                     <div class="single-pro-button">
                                         <div class="pro-button">
-                                            <a href="#">ADD TO Cart</a>
-                                        </div>
-                                        <div class="pro-viwer">
-                                            <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="#"><i class="fa fa-eye"></i></a>
+                                            <a href="/edit-product">EDIT PRODUCT</a>
                                         </div>
                                     </div>
                                     <div class="clear"></div>
-                                    <div class="single-social-area">
-                                        <h3>share this on</h3>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        <a href="#"><i class="fa fa-feed"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                    </div>
                                 </div>
                                 <div class="single-pro-cn">
                                     <h3>OVERVIEW</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat. Duis aute irure dolor in reprehenderit in voluptate </p>
+                                    <p>{{this.Note}} </p>
                                 </div>
                             </div>
+                            {{/each}}
                         </div>
                     </div>
                 </div>
