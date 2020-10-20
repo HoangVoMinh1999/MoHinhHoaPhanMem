@@ -41,7 +41,7 @@
                             <th>Image</th>
                             <th>Product Title</th>
                             <th>Status</th>
-                            <th>Purchases</th>
+                            <th>Quantity</th>
                             <th>Product sales</th>
                             <th>Stock</th>
                             <th>Price</th>
@@ -51,11 +51,7 @@
                         {{#each data}}
                         <tr>
                             <td><img src="img/new-product/6-small.jpg" alt="" /></td>
-<<<<<<< HEAD
-                            <td>{{Name}}</td>
-=======
-                            <td> Product Title 2</td>
->>>>>>> ddd3eb4218128860ef3438ce461e4b6e102b6d11
+                            <td>{{this.Name}}</td>
                             <td>
                                 <button class="ps-setting" data-toggle="modal" title="Trash"
                                     data-target="#statusModel">Paused</button>
@@ -72,13 +68,16 @@
                                                 <form method="POST" action="/product-list">
                                                     <div class="row">
                                                         <div class="col-sm-4">
-                                                            <input class="pd-setting btn-lg" type="submit" value="Active" style="width: 100%;">
+                                                            <input class="pd-setting btn-lg" type="submit"
+                                                                value="Active" style="width: 100%;">
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <input class="ps-setting" type="submit" value="Paused" style="width: 100%;">
+                                                            <input class="ps-setting" type="submit" value="Paused"
+                                                                style="width: 100%;">
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <input class="ds-setting" type="submit" value="Disabled" style="width: 100%;">
+                                                            <input class="ds-setting" type="submit" value="Disabled"
+                                                                style="width: 100%;">
                                                         </div>
                                                     </div>
                                                 </form>
@@ -87,13 +86,14 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>60</td>
-                            <td>$1020</td>
-                            <td>In Stock</td>
-                            <td>$17</td>
+                            <td>{{this.Quantity}}</td>
+                            <td>{{this.ProductSales}}</td>
+                            <td>{{this.Stock}}</td>
+                            <td>{{this.Price}} VND</td>
                             <td>
-                                
-                                <a href="/edit-product"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o"
+
+                                <a href="/edit-product"><button data-toggle="tooltip" title="Edit"
+                                        class="pd-setting-ed"><i class="fa fa-pencil-square-o"
                                             aria-hidden="true"></i></button></a>
                                 <button data-toggle="modal" title="Trash" class="pd-setting-ed"
                                     data-target="#exampleModalCenter"><i class="fa fa-trash-o"
@@ -127,29 +127,13 @@
                             <th hidden>Id</th>
                         </tr>
                         {{/each}}
-                            <td><img src="img/new-product/7-small.jpg" alt="" /></td>
-                            <td>Product Title 6</td>
-                            <td>
-                                <button class="ps-setting">Paused</button>
-                            </td>
-                            <td>400</td>
-                            <td>$4000</td>
-                            <td>In Stock</td>
-                            <td>$10</td>
-                            <td>
-                                <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i
-                                        class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i
-                                        class="fa fa-trash-o" aria-hidden="true"></i></button>
-                            </td>
-                        </tr>
                     </table>
                     <div class="custom-pagination">
                         <ul class="pagination">
                             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            {{#each pages}}
+                            <li class="page-item"><a class="page-link" href="#">{{this}}</a></li>
+                            {{/each}}
                             <li class="page-item"><a class="page-link" href="#">Next</a></li>
                         </ul>
                     </div>
