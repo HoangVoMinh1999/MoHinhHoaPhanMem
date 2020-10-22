@@ -19,13 +19,12 @@ const formatter = new Intl.NumberFormat('en-US', {
 exports.ShowProducts = async function (req, res, next) {
     var data = []
     var query = req.query.Page;
-    console.log(query)
-    Product.countDocuments({IsDeleted: false}, function (err, count) {
+    Product.countDocuments({}, function (err, count) {
         if (err) throw err;
         if (count > 0) {
             var temp = count % 10 != 0 ? Math.floor(count/10) + 1 : count/10 
             var pages = createNumberArray(temp)
-            Product.find().skip((query-1)*10).limit(10).lean().exec(async function (err, result) {
+            Product.find({IsDeleted: false}).skip((query-1)*10).limit(10).lean().exec(async function (err, result) {
                 if (err) throw err;
                 data = result.map(function (doc) { return doc })
                 await res.render('products/product_list', { title: 'Product', layout: 'Index_Layout', data: data ,pages: pages});
@@ -35,28 +34,39 @@ exports.ShowProducts = async function (req, res, next) {
 }
 exports.UpdateProduct_ProductList = async function(req,res,next){
     var query = mongoose.Types.ObjectId(req.body._id)
-    let item = {
-        Name: req.body.Name,
-        Brand: req.body.Brand,
-        Price: req.body.Price,
-        Quantity: req.body.Quantity,
-        ProductSales: req.body.ProductSales,
-        MaxSize:req.body.MaxSize,
-        Stock: req.body.Stock,
-        Note:req.body.Note,
+    let item = null
+    if (req.body.Name != undefined){
+        item = {
+            Name: req.body.Name,
+            Brand: req.body.Brand,
+            Price: req.body.Price,
+            Quantity: req.body.Quantity,
+            ProductSales: req.body.ProductSales,
+            MaxSize:req.body.MaxSize,
+            Stock: req.body.Stock,
+            Note:req.body.Note,
+            UpdatedDate : new Date().toLocaleDateString(),
+        }
     }
-    console.log(item)
+    else
+    {
+        query = req.body._id;
+        item = {
+            IsDeleted:true,
+            UpdatedDate : new Date().toLocaleDateString(),
+        }
+    }
     Product.findByIdAndUpdate(query,item ,{ runValidators: true },async function(err){
         if (err) throw err;
-        console.log("123")
+        console.log("Update Successfully !!!")
     })
     var data = []
-    Product.countDocuments({}, function (err, count) {
+    Product.countDocuments({IsDeleted: false}, function (err, count) {
         if (err) throw err;
         if (count > 0) {
-            var temp = count % 10 != 0 ? new Int16Array(count/10) + 1 : count/10 
+            var temp = count % 10 != 0 ? Math.floor(count/10) + 1 : count/10 
             var pages = createNumberArray(temp)
-            Product.find().lean().exec(async function (err, result) {
+            Product.find({IsDeleted: false}).skip((query-1)*10).limit(10).lean().exec(async function (err, result) {
                 if (err) throw err;
                 data = result.map(function (doc) { return doc })
                 await res.render('products/product_list', { title: 'Product', layout: 'Index_Layout', data: data ,pages: pages});
@@ -75,6 +85,8 @@ exports.InsertNewProduct = async function (req, res, next) {
         MaxSize:req.body.MaxSize,
         Stock: "In Stock",
         Note:req.body.Note != null ? req.body.Note : "",
+        CreatedDate: new Date().toLocaleDateString(),
+        UpdatedDate: new Date().toLocaleDateString(),
         IsDeleted: false
     })
     newItem.save(function (err, result) {

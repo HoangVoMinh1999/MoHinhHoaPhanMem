@@ -40,8 +40,18 @@ app.use('/add-product',indexRouter);
 
 app.use('/users', usersRouter);
 // Setup mongoose
+mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
-
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true)
+var uri = process.env.DB_LOCALHOST
+var db = mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, res) {
+  if (err) {
+    console.log('ERROR connecting to: ' + uri + '. ' + err);
+  } else {
+    console.log('Succeeded connected to: ' + uri);
+  }
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

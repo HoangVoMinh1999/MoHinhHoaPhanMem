@@ -16,6 +16,7 @@
     "jade": "~1.11.0",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.9",
+    "mongoose-auto-increment": "^5.0.1",
     "morgan": "~1.9.1"
   },
   "devDependencies": {
