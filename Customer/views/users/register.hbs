@@ -19,15 +19,15 @@
                 </div>
             </div>
             {{/if}}
-            <form action="/user/registration" method="post">
+            <form action="/register" method="post">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="firstname">Họ</label>
+                            <label for="firstname">Tên đệm và tên</label>
                             <input type="text" id="firstname" class="form-control" name="firstname" required>
                         </div>
                         <div class="col-sm-6">
-                            <label for="lastname">Tên đệm và tên </label>
+                            <label for="lastname">Họ</label>
                             <input type="text" id="lastname" class="form-control" name="lastname" required>
                         </div>
                     </div>
@@ -45,19 +45,20 @@
                     <input type="text" id="email" name="email" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" minlength="6" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>Confirm Password</label>
-                    <input type="password" id="confirmpassword" class="form-control" name="confirmpassword" required>
+                    <label>Nhập lại mật khẩu</label>
+                    <input type="password" id="confirmpassword" class="form-control" minlength="6" name="confirmpassword" required>
                 </div>
-                <input type="hidden" , name="_csrf" value="{{csrfToken}}">
+                
+                <p style="color: red;">{{message}}</p>
                 <button type="submit" class="btn btn-warning btn-lg">Đăng ký</button>
             </form>
             <hr>
 
-            <p>Bạn đã có tài khoản? <a href="/user/login">Đăng nhập</a></p>
+            <p>Bạn đã có tài khoản? <a href="/login">Đăng nhập</a></p>
             <p>Quay lại <a href="/">trang chủ</a>.</p>
         </div>
     </div>

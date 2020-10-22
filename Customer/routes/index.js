@@ -15,6 +15,8 @@ router.get('/login', loginController.login);
 
 router.get('/register', registerController.register);
 
+router.post('/register', registerController.postRegister);
+
 router.get('/product', productController.product_list);
 
 router.get('/cart', cartController.cart);
