@@ -66,8 +66,17 @@
                                                     <input type="text" class="form-control" placeholder="Category">
                                                 </div>
                                                 <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="icon nalika-new-file"
+                                                            aria-hidden="true"></i></span>
+                                                    <select class="form-control pro-edt-select form-control-primary" name="Stock">
+                                                        <option value="{{this.Stock}}">{{this.Stock}}</option>
+                                                        <option value="In stock">In stock</option>
+                                                        <option value="Out of stock">Out of stock</option>
+                                                    </select>
+                                                </div>
+                                                <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon"><span>Ghi chú</span></span>
-                                                    <textarea class="form-control" rows="4">{{this.Note}}</textarea>
+                                                    <textarea class="form-control" rows="2">{{this.Note}}</textarea>
                                                 </div>
                                             </div>
                                         </div>

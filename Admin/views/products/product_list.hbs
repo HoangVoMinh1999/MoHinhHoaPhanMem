@@ -40,61 +40,22 @@
                         <tr>
                             <th>Image</th>
                             <th>Product Title</th>
-                            <th>Status</th>
                             <th>Quantity</th>
                             <th>Product sales</th>
                             <th>Stock</th>
                             <th>Price</th>
-                            <th>Setting</th>
+                            <th></th>
                             <th hidden>Id</th>
                         </tr>
                         {{#each data}}
                         <tr>
                             <td><img src="img/new-product/6-small.jpg" alt="" /></td>
                             <td>{{this.Name}}</td>
-                            <td>
-                                <button class="ps-setting" data-toggle="modal" title="Trash"
-                                    data-target="#statusModel">Paused</button>
-                                <!-- Modal -->
-                                <div class="modal fade" id="statusModel" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document"
-                                        style="color: black;">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Thông báo</h5>
-                                            </div>
-                                            <div class="text-dark modal-body">
-                                                <form method="POST" action="/product-list">
-                                                    <div class="row">
-                                                        <div class="col-sm-4">
-                                                            <input class="pd-setting btn-lg" type="submit"
-                                                                value="Active" style="width: 100%;">
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input class="ps-setting" type="submit" value="Paused"
-                                                                style="width: 100%;">
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input class="ds-setting" type="submit" value="Disabled"
-                                                                style="width: 100%;">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
                             <td>{{this.Quantity}}</td>
                             <td>{{this.ProductSales}}</td>
                             <td>{{this.Stock}}</td>
                             <td>{{this.Price}} VND</td>
                             <td>
-
-                                <a href="/edit-product"><button data-toggle="tooltip" title="Edit"
-                                        class="pd-setting-ed"><i class="fa fa-pencil-square-o"
-                                            aria-hidden="true"></i></button></a>
                                 <button data-toggle="modal" title="Trash" class="pd-setting-ed"
                                     data-target="#exampleModalCenter"><i class="fa fa-trash-o"
                                         aria-hidden="true"></i></button>
@@ -111,9 +72,12 @@
                                                 <p>Bạn có chắc chắn muốn xóa sản phẩm không?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary">Yes</button>
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">No</button>
+                                                <form action="/product-list" method="post">
+                                                    <button type="submit" class="btn btn-primary" name="IsDeleted"
+                                                        value="true">Yes</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">No</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +85,8 @@
                             </td>
                             <td>
                                 <form action="/product-detail">
-                                    <button class="btn btn-default" type="submit" name="_id" value="{{this._id}}">Xem chi tiết</button>
+                                    <button class="btn btn-default" type="submit" name="_id" value="{{this._id}}">Xem
+                                        chi tiết</button>
                                 </form>
                             </td>
                             <th hidden>Id</th>
@@ -129,13 +94,13 @@
                         {{/each}}
                     </table>
                     <div class="custom-pagination">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            {{#each pages}}
-                            <li class="page-item"><a class="page-link" href="#">{{this}}</a></li>
-                            {{/each}}
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
+                        <form action="/product-list">
+                            <ul class="pagination">
+                                {{#each pages}}
+                                <li class="page-item"><input type="submit" name="Page" value="{{this}}"></li>
+                                {{/each}}
+                            </ul>
+                        </form>
                     </div>
                 </div>
             </div>

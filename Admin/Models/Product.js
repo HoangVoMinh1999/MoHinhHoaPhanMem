@@ -18,7 +18,6 @@ var ProductSchema = new mongoose.Schema({
   Price: Number,
   Quantity: Number,
   ProductSales: Number,
-  Status: String,
   Stock: String,
   Note : String,
   MaxSize: String,

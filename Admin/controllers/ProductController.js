@@ -15,26 +15,20 @@ const formatter = new Intl.NumberFormat('en-US', {
     currency: 'USD',
     minimumFractionDigits: 2
 })
-function createNumberArray(N){
-    var A = new Array(N);
-    for (i = 0;i< N;i++)
-    {
-        A[i] = i+1;
-    }
-    return A
-}
 
 exports.ShowProducts = async function (req, res, next) {
     var data = []
-    Product.countDocuments({}, function (err, count) {
+    var query = req.query.Page;
+    console.log(query)
+    Product.countDocuments({IsDeleted: false}, function (err, count) {
         if (err) throw err;
         if (count > 0) {
-            var temp = count % 10 != 0 ? new Int16Array(count/10) + 1 : count/10 
+            var temp = count % 10 != 0 ? Math.floor(count/10) + 1 : count/10 
             var pages = createNumberArray(temp)
-            Product.find().lean().exec(async function (err, result) {
+            Product.find().skip((query-1)*10).limit(10).lean().exec(async function (err, result) {
                 if (err) throw err;
                 data = result.map(function (doc) { return doc })
-                await res.render('product_list', { title: 'Product', layout: 'Index_Layout', data: data ,pages: pages});
+                await res.render('products/product_list', { title: 'Product', layout: 'Index_Layout', data: data ,pages: pages});
             })
         }
     });
@@ -48,7 +42,6 @@ exports.UpdateProduct_ProductList = async function(req,res,next){
         Quantity: req.body.Quantity,
         ProductSales: req.body.ProductSales,
         MaxSize:req.body.MaxSize,
-        Status: req.body.Status,
         Stock: req.body.Stock,
         Note:req.body.Note,
     }
@@ -66,7 +59,7 @@ exports.UpdateProduct_ProductList = async function(req,res,next){
             Product.find().lean().exec(async function (err, result) {
                 if (err) throw err;
                 data = result.map(function (doc) { return doc })
-                await res.render('product_list', { title: 'Product', layout: 'Index_Layout', data: data ,pages: pages});
+                await res.render('products/product_list', { title: 'Product', layout: 'Index_Layout', data: data ,pages: pages});
             })
         }
     });
@@ -80,7 +73,6 @@ exports.InsertNewProduct = async function (req, res, next) {
         Quantity: req.body.Quantity,
         ProductSales: 0,
         MaxSize:req.body.MaxSize,
-        Status: "Active",
         Stock: "In Stock",
         Note:req.body.Note != null ? req.body.Note : "",
         IsDeleted: false
@@ -88,7 +80,7 @@ exports.InsertNewProduct = async function (req, res, next) {
     newItem.save(function (err, result) {
         if (err) throw err;
     })
-    await res.render('product_add', { title: 'Add Product', layout: 'Index_Layout' });
+    await res.render('products/product_add', { title: 'Add Product', layout: 'Index_Layout' });
 }
 
 exports.ProductDetail = async function(req,res,next){
@@ -104,12 +96,11 @@ exports.ProductDetail = async function(req,res,next){
             Quantity: result.Quantity,
             ProductSales: result.ProductSales,
             MaxSize:result.MaxSize,
-            Status: result.Status,
-            Stock: result.Stock,
+            Stock: result.Stock != "" ? result.Stock : "None",
             Note:result.Note != null ? result.Note : "Chưa có thông tin ghi chú",
         })
         data.push(item)
-        await res.render('product_detail', { title: 'Detail', layout: 'Index_Layout',data:data });
+        await res.render('products/product_detail', { title: 'Detail', layout: 'Index_Layout',data:data });
     })
 }
 
@@ -126,11 +117,21 @@ exports.EditProduct = async function(req,res,next){
             Quantity: result.Quantity,
             ProductSales: result.ProductSales,
             MaxSize:result.MaxSize,
-            Status: result.Status,
-            Stock: result.Stock,
+            Stock: result.Stock != "" ? result.Stock : "None",
             Note:result.Note != null ? result.Note : "Chưa có thông tin ghi chú",
         })
         data.push(item)
-        await res.render('product_edit', { title: 'Edit Product', layout: 'Index_Layout',data:data });
+        await res.render('products/product_edit', { title: 'Edit Product', layout: 'Index_Layout',data:data });
     })
+}
+
+//--- Support Function
+
+function createNumberArray(N){
+    var A = new Array(N);
+    for (i = 0;i< N;i++)
+    {
+        A[i] = i+1;
+    }
+    return A
 }
