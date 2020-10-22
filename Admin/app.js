@@ -39,7 +39,8 @@ app.use('/add-product',indexRouter);
 
 
 app.use('/users', usersRouter);
-
+// Setup mongoose
+mongoose.set('useFindAndModify', false);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

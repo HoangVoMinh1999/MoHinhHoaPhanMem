@@ -19,12 +19,9 @@ router.get('/login',function(req,res,next){
 //---Product
 router.get('/product-list',ProductController.ShowProducts);
 
-router.post('/product-list',function(req,res,next){
-  res.render('product_list',{title:'Product',layout:'Index_Layout'});
-});
+router.post('/product-list',ProductController.UpdateProduct_ProductList);
 
-router.get('/product-detail',ProductController.ShowProductBy_id);
-
+router.get('/product-detail',ProductController.ProductDetail);
 
 router.get('/add-product',function(req,res,next){
   res.render('product_add',{title:'Add Product',layout:'Index_Layout'});
@@ -32,7 +29,6 @@ router.get('/add-product',function(req,res,next){
 
 router.post('/add-product',ProductController.InsertNewProduct)
 
-router.get('/edit-product',function(req,res,next){
-  res.render('product_edit',{title:'Edit Product',layout:'Index_Layout'});
-});
+router.get('/edit-product',
+    ProductController.EditProduct);
 module.exports = router;
