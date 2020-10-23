@@ -16,13 +16,13 @@
 					<ul class="nav navbar-nav menu_nav ml-auto">
 						<li class="nav-item "><a class="nav-link" href="/">Trang chủ</a></li>
 						<li class="nav-item "><a class="nav-link" href="/product">Sản phẩm</a></li>
-						{{# if login}}
+						{{#if session.userSession}}
 						<li class="nav-item submenu dropdown">
 							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
 								aria-haspopup="true" aria-expanded="false">Tài khoản</a>
 							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="../users/logout">Đăng xuất</a></li>
-								<li class="nav-item"><a class="nav-link" href="../users/profile">Thông tin tài khoản</a>
+								<li class="nav-item"><a class="nav-link" href="/logout">Đăng xuất</a></li>
+								<li class="nav-item"><a class="nav-link" href="/profile">Thông tin tài khoản</a>
 								</li>
 							</ul>
 						</li>
@@ -32,11 +32,11 @@
 						{{/if}}
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						{{# if login}}
-						<li class="nav-item"><a href="/cart/" class="cart"><span
+						{{#if session.userSession}}
+						<li class="nav-item"><a href="/cart" class="cart"><span
 									class="ti-bag">{{session.cart.SoLuong}}</span></a></li>
 						{{else}}
-						<li class="nav-item"><a href="/cart/" class="cart"><span
+						<li class="nav-item"><a href="/login" class="cart"><span
 									class="ti-bag">{{session.cart.SoLuong}}</span></a></li>
 						{{/if}}
 						<li class="nav-item">

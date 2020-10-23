@@ -52,7 +52,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     secret: 'somesecret',
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 1000 * 60 * 60 * 2 }
 }));
 
 app.use(function(req, res, next) {
