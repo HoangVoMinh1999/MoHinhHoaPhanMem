@@ -1,31 +1,47 @@
 <section class="banner-area organic-breadcrumb">
-	<div class="container">
-		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-			<div class="col-first">
-				<h1>Thông tin tài khoản</h1>
-			</div>
-		</div>
-	</div>
-</section>
-        <!-- LOCAL INFORMATION -->
-		
-		<div class="container">
-			<div class="row">
-        <div class="col-sm-6 col-sm-offset-3 ">
-            <div class="well">
-                <h3><span class="fa fa-user"></span>Tài khoản</h3>
-
-                    <p>
-                        <strong>Id</strong>: {{user._id }}<br>
-                        <strong>Email</strong>: {{user.email }}<br>
-						<strong>Họ</strong>: {{user.firstname }}<br>
-						<strong>Tên đệm và tên</strong>: {{user.lastname }}<br>
-                        <strong>Tên đăng nhập</strong>: {{user.username}} <br>
-						<strong>Số điện thoại</strong>: {{user.phone}}<br>
-						<strong>Chức vụ</strong>: {{user.roles}}
-                    </p>
-
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Thông tin cá nhân</h1>
             </div>
         </div>
-</div>
     </div>
+</section>
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="firstname">Tên đệm và tên</label>
+                            <h5>{{session.userSession.firstname}}</h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="lastname">Họ</label>
+                            <h5>{{session.userSession.lastname}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tên đăng nhập</label>
+                    <h5>{{session.userSession.username}}</h5>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <h5>{{session.userSession.phone}}</h5>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <h5>{{session.userSession.email}}</h5>
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <h5>{{session.userSession.address}}</h5>
+                </div>
+            <hr>
+
+            <p>Bạn muốn thay đổi mật khẩu <a href="/changepassword">Thay đổi</a></p>
+            <p>Quay lại <a href="/">trang chủ</a>.</p>
+        </div>
+    </div>
+</section>
