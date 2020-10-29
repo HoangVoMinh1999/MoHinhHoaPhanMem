@@ -4,29 +4,96 @@ const async = require('async');
 
 exports.product_list = (req, res, next) => {
     let page = Number(req.query.page);
-    Product.find({}).lean().skip(6 * page - 6).limit(6)
-        .exec(function(err, list_products) {
-            if (err) { return next(err) }
-            Product.count({}, function(err, count) {
-                console.log("Number of users: ", count);
-                let pages = [1];
-                let page_size = Math.ceil(count / 6);
-                for (let index = 2; index <= page_size; index++) {
-                    pages.push(index);
-                }
-                Category.find({}).lean().exec(function(err, list_categories) {
-                    if (err) { return next(err) }
-                    res.render('shop/product', {
-                        title: 'Trang sản phẩm',
-                        product_list: list_products,
-                        pagination: pages,
-                        last_page: page_size,
-                        category_list: list_categories
-                    });
-                })
+    let action = req.query.act;
+    if (action === 'asc') {
+        Product.find({}).lean().sort([
+                ['price', 'ascending']
+            ]).skip(6 * page - 6).limit(6)
+            .exec(function(err, list_products) {
+                if (err) { return next(err) }
+                Product.count({}, function(err, count) {
+                    console.log("Number of users: ", count);
+                    let pages_number = [1];
+                    let pages_link = ['1&act=asc'];
+                    let page_size = Math.ceil(count / 6);
+                    for (let index = 2; index <= page_size; index++) {
+                        pages_number.push(index);
+                        pages_link.push(index + '&act=asc');
+                    }
+                    Category.find({}).lean().exec(function(err, list_categories) {
+                        if (err) { return next(err) }
+                        res.render('shop/product', {
+                            title: 'Trang sản phẩm',
+                            product_list: list_products,
+                            pagination_number: pages_number,
+                            pagination_link: pages_link,
+                            last_page: page_size,
+                            category_list: list_categories,
+                        });
+                    })
 
-            })
-        });
+                })
+            });
+
+    } else if (action === 'desc') {
+        Product.find({}).lean().sort([
+                ['price', 'descending']
+            ]).skip(6 * page - 6).limit(6)
+            .exec(function(err, list_products) {
+                if (err) { return next(err) }
+                Product.count({}, function(err, count) {
+                    console.log("Number of users: ", count);
+                    let pages_number = [1];
+                    let pages_link = ['1&act=desc'];
+                    let page_size = Math.ceil(count / 6);
+                    for (let index = 2; index <= page_size; index++) {
+                        pages_number.push(index);
+                        pages_link.push(index + '&act=desc');
+                    }
+                    Category.find({}).lean().exec(function(err, list_categories) {
+                        if (err) { return next(err) }
+                        res.render('shop/product', {
+                            title: 'Trang sản phẩm',
+                            product_list: list_products,
+                            pagination_number: pages_number,
+                            pagination_link: pages_link,
+                            last_page: page_size,
+                            category_list: list_categories,
+                        });
+                    })
+
+                })
+            });
+
+    } else {
+        Product.find({}).lean().skip(6 * page - 6).limit(6)
+            .exec(function(err, list_products) {
+                if (err) { return next(err) }
+                Product.count({}, function(err, count) {
+                    console.log("Number of users: ", count);
+                    let pages_number = [1];
+                    let pages_link = [1];
+                    let page_size = Math.ceil(count / 6);
+                    for (let index = 2; index <= page_size; index++) {
+                        pages_number.push(index);
+                        pages_link.push(index);
+                    }
+                    Category.find({}).lean().exec(function(err, list_categories) {
+                        if (err) { return next(err) }
+                        res.render('shop/product', {
+                            title: 'Trang sản phẩm',
+                            product_list: list_products,
+                            pagination_number: pages_number,
+                            pagination_link: pages_link,
+                            last_page: page_size,
+                            category_list: list_categories
+                        });
+                    })
+
+                })
+            });
+    }
+
 };
 
 exports.product_detail = (req, res, next) => {
