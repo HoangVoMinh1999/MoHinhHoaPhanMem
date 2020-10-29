@@ -30,5 +30,25 @@ exports.product_list = (req, res, next) => {
 };
 
 exports.product_detail = (req, res, next) => {
-    res.render('shop/detail', { title: 'Chi tiết sản phẩm' });
+    var id = req.params.id;
+    async.parallel({
+        product: function(callback) {
+            Product.findById(id).lean()
+                .exec(callback);
+        }
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.product == null) {
+            var err = new Error('Product not found');
+            err.status = 404;
+            return next(err);
+        }
+        Category.findById(results.product.cateId).lean().exec(function(err, cate) {
+            if (err) { return next(err); }
+
+            res.render('shop/detail', { title: 'Chi tiết sản phẩm', product: results.product, category: cate });
+        });
+
+    });
+
 };

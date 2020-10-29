@@ -21,7 +21,7 @@
 					<ul class="main-categories">
 						{{#each category_list}}
 						<li class="main-nav-list">
-							<a href="/product?key={{name}}.{{_id}}" aria-expanded="true" aria-controls="fruitsVegetable">{{name}}</a>
+							<a href="/product?key={{name}}&id={{_id}}" aria-expanded="true" aria-controls="fruitsVegetable">{{name}}</a>
 						{{/each}}	
 						</li>
 					</ul>
@@ -76,7 +76,7 @@
 											<span class="lnr lnr-heart"></span>
 											<p class="hover-text">Yêu thích</p>
 										</a>
-										<a href="/detail/{{_id}}" class="social-info">
+										<a href="/product/detail/{{_id}}" class="social-info">
 											<span class="lnr lnr-move"></span>
 											<p class="hover-text">Chi tiết</p>
 										</a>

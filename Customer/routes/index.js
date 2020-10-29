@@ -37,11 +37,11 @@ router.post('/changepassword', userController.postchangepassword);
 
 router.get('/product', productController.product_list);
 
+router.get('/product/detail/:id', productController.product_detail);
+
 router.get('/cart', cartController.cart);
 
 router.get('/checkout', checkoutController.checkout);
-
-router.get('/detail', productController.product_detail);
 
 router.get('/confirmation', checkoutController.confirmation);
 
