@@ -41,6 +41,8 @@ router.get('/product/detail/:id', productController.product_detail);
 
 router.get('/cart', cartController.cart);
 
+router.get('/product/:id', cartController.addproduct);
+
 router.get('/checkout', checkoutController.checkout);
 
 router.get('/confirmation', checkoutController.confirmation);

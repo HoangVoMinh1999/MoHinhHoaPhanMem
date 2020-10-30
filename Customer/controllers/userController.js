@@ -3,11 +3,16 @@ var Role = require('../models/role');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var Cart = require('../models/cart');
 
-var sess;
 // login
 exports.login = (req, res, next) => {
-    res.render('users/login', { title: 'Login' });
+    if (req.session.userSession) {
+        res.redirect('/')
+    } else {
+        res.render('users/login', { title: 'Login' });
+    }
+
 }
 
 passport.use(new LocalStrategy({
@@ -26,10 +31,23 @@ passport.use(new LocalStrategy({
             }
 
             req.session.userSession = user;
-            sess = user;
+            Cart.findOne({ userId: user._id },
+                function(err, cart) {
+                    if (err) { return done(err); }
+                    if (!cart) {
+                        var productId = "5f913b7ee28a1a763f8a2a1f"
+                        var number = 1;
+                        var newCart = Cart({
+                            userId: user._id
+                        });
+                        newCart.save(function(err, result) {});
+                        req.session.cart = newCart;
+                    } else {
+                        req.session.cart = cart;
+                    }
+                    return done(null, user);
+                })
 
-
-            return done(null, user);
         });
     }
 ));
@@ -48,14 +66,17 @@ exports.userLogin = passport.authenticate('local', {
 
 // logout
 exports.logout = (req, res, next) => {
-    // delete session in server
-
     req.session.destroy();
     res.redirect('/');
 }
 
 exports.register = (req, res, next) => {
-    res.render('users/register', { title: 'Register' });
+    if (req.session.userSession) {
+        res.redirect('/');
+    } else {
+        res.render('users/register', { title: 'Register' });
+    }
+
 }
 
 exports.postRegister = (req, res, next) => {
@@ -98,17 +119,27 @@ exports.postRegister = (req, res, next) => {
 }
 
 exports.profile = (req, res, next) => {
-    res.render('users/profile', { title: 'Profie' });
+    if (req.session.userSession) {
+        res.render('users/profile', { title: 'Profie' });
+    } else {
+        res.redirect('/login');
+    }
+
 }
 
 exports.changepassword = (req, res, next) => {
-    res.render('users/changepassword', { title: 'Change password' });
+    if (req.session.userSession) {
+        res.render('users/changepassword', { title: 'Change password' });
+    } else {
+        res.redirect('/login');
+    }
+
 }
 exports.postchangepassword = (req, res, next) => {
     let oldpassword = req.body.oldpassword;
     let newpassword = req.body.newpassword;
     let confirmpassword = req.body.confpassword;
-    User.findOne({ username: sess.username }, function(err, user) {
+    User.findOne({ username: req.session.userSession.username }, function(err, user) {
         if (err) { return done(err); }
         if (user) {
             var hash = user.password;
