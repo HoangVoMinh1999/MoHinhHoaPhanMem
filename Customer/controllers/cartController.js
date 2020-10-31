@@ -53,8 +53,10 @@ exports.addproduct = (req, res, next) => {
                                 cart.products.push({ productId, name, imagePath, quantity, price, total });
                             }
                             cart.total = 0
+                            cart.quantity = 0;
                             for (var i = 0; i < cart.products.length; i++) {
                                 cart.total = cart.total + cart.products[i].total;
+                                cart.quantity = cart.quantity + cart.products[i].quantity;
                             }
                             cart.save(function(err, result) {});
                             req.session.cart = cart;
@@ -66,5 +68,30 @@ exports.addproduct = (req, res, next) => {
             });
     } else {
         res.redirect('/login');
+    }
+}
+exports.deleteproduct = (req, res, next) => {
+    if (req.session.userSession) {
+        var id = req.params.id;
+        Cart.findOne({ userId: req.session.userSession._id }, function(err, cart) {
+            if (err) { return done(err); }
+            if (!cart) {
+                var err = new Error('Cart not found');
+                err.status = 404;
+                return next(err);
+            } else {
+                let itemIndex = cart.products.findIndex(p => p.productId == id);
+                cart.products.splice(itemIndex, 1);
+                cart.total = 0;
+                cart.quantity = 0;
+                for (var i = 0; i < cart.products.length; i++) {
+                    cart.total = cart.total + cart.products[i].total;
+                    cart.quantity = cart.quantity + cart.products[i].quantity;
+                }
+                cart.save(function(err, result) {});
+                req.session.cart = cart;
+                res.redirect('/cart');
+            }
+        })
     }
 }

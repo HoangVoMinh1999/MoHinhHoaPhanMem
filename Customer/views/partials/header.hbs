@@ -32,12 +32,12 @@
 						{{/if}}
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						{{#if session.userSession}}
+						{{#if session.cart}}
 						<li class="nav-item"><a href="/cart" class="cart"><span
-									class="ti-bag">{{session.cart.SoLuong}}</span></a></li>
+									class="ti-bag">{{session.cart.quantity}}</span></a></li>
 						{{else}}
 						<li class="nav-item"><a href="/login" class="cart"><span
-									class="ti-bag">{{session.cart.SoLuong}}</span></a></li>
+									class="ti-bag"></span></a></li>
 						{{/if}}
 						<li class="nav-item">
 							<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>

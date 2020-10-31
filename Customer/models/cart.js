@@ -13,6 +13,7 @@ var CartSchema = new Schema({
     }],
     active: { type: Boolean, default: true },
     modifiedOn: { type: Date, default: Date.now },
+    quantity: { type: Number },
     total: { type: Number }
 
 

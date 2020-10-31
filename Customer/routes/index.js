@@ -41,6 +41,8 @@ router.get('/product/detail/:id', productController.product_detail);
 
 router.get('/cart', cartController.cart);
 
+router.get('/cart/:id', cartController.deleteproduct);
+
 router.get('/product/:id', cartController.addproduct);
 
 router.get('/checkout', checkoutController.checkout);
