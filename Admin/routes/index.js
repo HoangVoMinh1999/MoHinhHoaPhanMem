@@ -15,8 +15,7 @@ router.get('/', function(req, res, next) {
 router.get('/login',function(req,res,next){
   res.render('login',{title:'Login',layout:'Login_Layout'});
 });
-
-//---Product
+//#region  Product
 router.get('/product-list',ProductController.ShowProducts);
 
 router.post('/product-list',ProductController.UpdateProduct_ProductList);
