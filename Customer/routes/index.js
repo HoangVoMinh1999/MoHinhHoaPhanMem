@@ -1,20 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var flash = require('connect-flash');
+var homeController = require('../controllers/homeController');
 var productController = require('../controllers/productController');
 var userController = require('../controllers/userController');
 var cartController = require('../controllers/cartController');
 var checkoutController = require('../controllers/checkoutController');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('shop/index', { title: 'Express' });
-});
+router.get('/', homeController.home);
 
-router.get('/', function(req, res, next) {
-    //res.locals.data = req.session.userSession;
-    next();
-});
 router.use(flash());
 
 // Login
@@ -44,6 +39,8 @@ router.get('/cart', cartController.cart);
 router.get('/cart/:id', cartController.deleteproduct);
 
 router.get('/product/:id', cartController.addproduct);
+
+router.get('/product/detail/:id/:quantity', cartController.adddetailproduct);
 
 router.get('/checkout', checkoutController.checkout);
 
