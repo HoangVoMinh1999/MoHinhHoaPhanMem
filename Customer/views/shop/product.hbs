@@ -19,10 +19,12 @@
 				<div class="sidebar-categories">
 					<div class="head">Danh mục</div>
 					<ul class="main-categories">
-						{{#each category_list}}
+						
 						<li class="main-nav-list">
-							<a href="/product?key={{name}}&id={{_id}}" aria-expanded="true" aria-controls="fruitsVegetable">{{name}}</a>
-						{{/each}}	
+							<a href="/product?page={{page}}&sortby={{sortby}}&category=none">Tất cả</a>
+							{{#each category_list}}
+							<a href="/product?page={{../page}}&sortby={{../sortby}}&category={{_id}}">{{name}}</a>
+							{{/each}}	
 						</li>
 					</ul>
 				</div>
@@ -31,16 +33,30 @@
 				<!-- Start Filter Bar -->
 				<div class="filter-bar d-flex flex-wrap align-items-center">
 					<div class="sorting mr-auto">
-						<select onchange="window.location.href = this.value">
-							<option value="/product">Liên quan</option>
-							<option value="/product?act=asc">Giá: Thấp đến Cao</option>
-							<option value="/product?act=desc">Giá: Cao đến Thấp</option>
+						<select id="sortby" onchange="window.location.href = 'product?page='+{{page}}+'&sortby='+this.value+'&category='+'{{category}}'">
+							{{#if (eq sortby 'none')}}
+							<option value="none" selected="true">Liên quan</option>
+							{{else}}
+							<option value="none">Liên quan</option>
+							{{/if}}
+
+							{{#if (eq sortby 'ascending')}}
+							<option value="ascending" selected="true">Giá: Thấp đến Cao</option>
+							{{else}}
+							<option value="ascending">Giá: Thấp đến Cao</option>
+							{{/if}}
+
+							{{#if (eq sortby 'descending')}}
+							<option value="descending" selected="true">Giá: Cao đến Thấp</option>
+							{{else}}
+							<option value="descending">Giá: Cao đến Thấp</option>
+							{{/if}}
 						</select>
 					</div>
 					<div class="pagination">
 						<a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-						{{#each pagination_link}}
-						<a href="/product?page={{this}}">{{lookup ../pagination_number @key}}</a>
+						{{#each pagination_number}}
+						<a href="/product?page={{this}}&sortby={{../sortby}}&category={{../category}}">{{this}}</a>
 						{{/each}}
 						<a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
 					</div>
@@ -83,16 +99,30 @@
 				<!-- Start Filter Bar -->
 				<div class="filter-bar d-flex flex-wrap align-items-center">
 					<div class="sorting mr-auto">
-						<select>
-							<option value="/product">Liên quan</option>
-							<option value="/product?act=asc">Giá: Thấp đến Cao</option>
-							<option value="/product?act=desc">Giá: Cao đến Thấp</option>
+						<select id="sortby" onchange="window.location.href = 'product?page='+{{page}}+'&sortby='+this.value+'&category='+'{{category}}'">
+							{{#if (eq sortby 'none')}}
+							<option value="none" selected="true">Liên quan</option>
+							{{else}}
+							<option value="none">Liên quan</option>
+							{{/if}}
+
+							{{#if (eq sortby 'ascending')}}
+							<option value="ascending" selected="true">Giá: Thấp đến Cao</option>
+							{{else}}
+							<option value="ascending">Giá: Thấp đến Cao</option>
+							{{/if}}
+
+							{{#if (eq sortby 'descending')}}
+							<option value="descending" selected="true">Giá: Cao đến Thấp</option>
+							{{else}}
+							<option value="descending">Giá: Cao đến Thấp</option>
+							{{/if}}
 						</select>
 					</div>
 					<div class="pagination">
 						<a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-						{{#each pagination_link}}
-						<a href="/product?page={{this}}">{{lookup ../pagination_number @key}}</a>
+						{{#each pagination_number}}
+						<a href="/product?page={{this}}&sortby={{../sortby}}&category={{../category}}">{{this}}</a>
 						{{/each}}
 						<a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
 					</div>

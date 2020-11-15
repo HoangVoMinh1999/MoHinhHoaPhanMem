@@ -24,7 +24,19 @@ db.once('open', function(callback) {
 })
 
 // view engine setup
-app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'layout', layoutDir: __dirname + '/views/layouts/' }))
+app.engine('hbs', hbs({
+    extname: 'hbs',
+    defaultLayout: 'layout',
+    layoutDir: __dirname + '/views/layouts/',
+    helpers: {
+        eq: function() {
+            const args = Array.prototype.slice.call(arguments, 0, -1);
+            return args.every(function(expression) {
+                return args[0] === expression;
+            });
+        }
+    }
+}))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static('public'))
