@@ -32,10 +32,16 @@
 						<h3>{{product.title}}</h3>
 						<h2>{{product.price}}</h2>
 						<ul class="list">
-							<li><a class="active" href="#"><span>Category</span> : {{category.name}}</a></li>
-							<li><a href="#"><span>Tình trạng</span> : Còn hàng</a></li>
+							<li><a class="active"><span>Category</span> : {{category.name}}</a></li>
+							{{#if (eq product.quantity 0)}}
+							<li><a><span>Tình trạng</span> : Hết hàng</a></li>
+							{{else}}
+							<li><a><span>Tình trạng</span> : Còn hàng</a></li>
+							{{/if}}
 						</ul>
 						<p>{{product.description}}</p>
+						{{#if (eq product.quantity 0)}}
+						{{else}}
 						<div class="product_count">
 							<label for="qty">Quantity:</label>
 							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
@@ -44,7 +50,10 @@
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
 							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
 						</div>
+						{{/if}}
 						<div class="card_area d-flex align-items-center">
+							{{#if (eq product.quantity 0)}}
+							{{else}}
 							<script>
 								function addToCart(){
 									var link = document.getElementById('link');
@@ -55,6 +64,7 @@
 								}
 							</script>
 							<a class="primary-btn" id="link" onclick="addToCart()">Thêm vào giỏ hàng</a>
+							{{/if}}
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
 						</div>
