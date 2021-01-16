@@ -161,8 +161,20 @@ exports.postchangepassword = (req, res, next) => {
 }
 exports.wishlist = (req, res, next) => {
     if (req.session.userSession) {
+        User.findOne({ _id: req.session.userSession._id }).lean().exec(async function(err, user) {
+            for (var i = 0; i < user.wishlist.length; i++) {
+                let data = user.wishlist[i];
+                await Product.findOne({ _id: user.wishlist[i].productId }, function(err, product) {
+                    data['imagePath'] = product.imagePath;
+                    data['title'] = product.title;
+                    product.price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price);
+                    data['price'] = product.price;
+                })
+                user.wishlist[i] = data;
+            }
+            res.render('users/wishlist', { user: user });
+        })
 
-        res.render('users/wishlist');
     } else {
         res.redirect('/login');
     }
