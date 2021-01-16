@@ -1,0 +1,55 @@
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Đơn hàng của tôi</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Đơn hàng</th>
+                            <th scope="col">Tổng thanh toán</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Ngày tạo</th>
+                            <th scope="col">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each list_orders}}
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="media-body">
+                                        <a href="order-detail/{{_id}}">{{_id}}</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>{{total}}</h5>
+                            </td>
+                            <td>
+                                <h5>{{quantity}}</h5>
+                            </td>
+                            <td>
+                                <h5>{{createdAt}}</h5>
+                            </td>
+                            <td>
+                                <p>{{status}}</p>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
-                <h1>Giỏ Hàng</h1>
+                <h1>Chi tiết đơn hàng</h1>
             </div>
         </div>
     </div>
@@ -19,11 +19,10 @@
                             <th scope="col">Đơn Giá</th>
                             <th scope="col">Số lượng</th>
                             <th scope="col">Tổng cộng</th>
-                            <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each session.cart.products}}
+                        {{#each order.products}}
                         <tr>
                             <td>
                                 <div class="media">
@@ -39,26 +38,12 @@
                                 <h5>{{price}}</h5>
                             </td>
                             <td>
-                                <div class="product_count">
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="{{quantity}}"
-                                        title="Quantity:" class="input-text qty">
-                                    <button
-                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                        class="increase items-count" type="button"><i
-                                            class="lnr lnr-chevron-up"></i></button>
-                                    <button
-                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                        class="reduced items-count" type="button"><i
-                                            class="lnr lnr-chevron-down"></i></button>
-                                </div>
+                                <h5>{{quantity}}</h5>
                             </td>
                             <td>
                                 <h5>{{total}}</h5>
                             </td>
-                            <td>
-                                <a onMouseOver="this.style.color='red'" onMouseOut="this.style.color='inherit'"
-                                    href="/cart/{{productId}}">Xoá</a>
-                            </td>
+                           
                         </tr>
                         {{/each}}
 
@@ -73,7 +58,7 @@
                                 <h5>Tổng thanh toán</h5>
                             </td>
                             <td>
-                                <h5>{{session.cart.total}}</h5>
+                                <h5>{{order.total}}</h5>
                             </td>
                         </tr>
                         <tr class="out_button_area">
@@ -91,8 +76,7 @@
                             </td>
                             <td>
                                 <div class="checkout_btn_inner d-flex align-items-center">
-                                    <a class="gray_btn" href="/product">Tiếp tục mua sắm</a>
-                                    <a class="primary-btn" href="/checkout">Thanh toán</a>
+                                    <a class="primary-btn" href="/cancel-order">Huỷ đơn hàng</a>
                                 </div>
                             </td>
                         </tr>

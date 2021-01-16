@@ -6,6 +6,7 @@ var productController = require('../controllers/productController');
 var userController = require('../controllers/userController');
 var cartController = require('../controllers/cartController');
 var checkoutController = require('../controllers/checkoutController');
+var orderController = require('../controllers/orderController');
 
 /* GET home page. */
 router.get('/', homeController.home);
@@ -46,6 +47,8 @@ router.get('/checkout', checkoutController.checkout);
 
 router.get('/confirmation', checkoutController.confirmation);
 
-router.get('/order', checkoutController.order);
+router.get('/order', orderController.order);
+
+router.get('/order-detail/:id', orderController.order_detail);
 
 module.exports = router;

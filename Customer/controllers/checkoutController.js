@@ -6,6 +6,7 @@ exports.checkout = (req, res, next) => {
 exports.confirmation = (req, res, next) => {
     if (req.session.userSession) {
         const order = new Order({
+            userId: req.session.userSession._id,
             products: req.session.cart.products,
             quantity: req.session.cart.quantity,
             total: req.session.cart.total,
@@ -16,15 +17,4 @@ exports.confirmation = (req, res, next) => {
     } else {
         res.redirect('/login');
     }
-
-
-}
-
-exports.order = (req, res, next) => {
-    if (req.session.userSession) {
-        res.render('shop/order');
-    } else {
-        res.redirect('/login');
-    }
-
 }
