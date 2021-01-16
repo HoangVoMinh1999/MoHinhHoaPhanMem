@@ -51,4 +51,6 @@ router.get('/order', orderController.order);
 
 router.get('/order-detail/:id', orderController.order_detail);
 
+router.get('/order-detail/cancel-order/:id', orderController.cancel_order);
+
 module.exports = router;

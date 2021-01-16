@@ -74,11 +74,13 @@
                             <td>
 
                             </td>
+                            {{#if (eq order.status 'Chờ xác nhận')}}
                             <td>
                                 <div class="checkout_btn_inner d-flex align-items-center">
-                                    <a class="primary-btn" href="/cancel-order">Huỷ đơn hàng</a>
+                                    <a class="primary-btn" href="/order-detail/cancel-order/{{order._id}}">Huỷ đơn hàng</a>
                                 </div>
                             </td>
+                            {{/if}}
                         </tr>
                     </tbody>
                 </table>

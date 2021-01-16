@@ -17,12 +17,24 @@ exports.order_detail = (req, res, next) => {
         let id = req.params.id;
         Order.findOne({ _id: id }).lean().exec(function(err, order) {
             res.render('shop/order-detail', { order: order });
-        })
+        });
 
     } else {
         res.redirect('/login');
     }
+}
 
-
-
+exports.cancel_order = (req, res, next) => {
+    if (req.session.userSession) {
+        let id = req.params.id;
+        Order.findOne({ _id: id }, function(err, order) {
+            if (order.status == 'Chờ xác nhận') {
+                order.status = 'Đã huỷ hàng';
+                order.save();
+                res.redirect('/order');
+            }
+        });
+    } else {
+        res.redirect('/login');
+    }
 }
