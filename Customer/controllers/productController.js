@@ -6,9 +6,6 @@ exports.product_list = (req, res, next) => {
     let page = Number(req.query.page) || Number(1);
     let sortby = req.query.sortby || "none";
     let category = req.query.category || "none";
-    console.log(page);
-    console.log(sortby);
-    console.log(category);
     if (sortby != "none") {
         if (category != "none") {
             Product.find({ cateId: category }).lean().sort([
@@ -16,8 +13,10 @@ exports.product_list = (req, res, next) => {
                 ]).skip(6 * page - 6).limit(6)
                 .exec(function(err, list_products) {
                     if (err) { return next(err) }
+                    for (var i = 0; i < list_products.length; i++) {
+                        list_products[i].price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(list_products[i].price);
+                    }
                     Product.count({ cateId: category }, function(err, count) {
-                        console.log("Number of users: ", count);
                         let pages_number = [1];
                         let page_size = Math.ceil(count / 6);
                         for (let index = 2; index <= page_size; index++) {
@@ -45,8 +44,10 @@ exports.product_list = (req, res, next) => {
                 ]).skip(6 * page - 6).limit(6)
                 .exec(function(err, list_products) {
                     if (err) { return next(err) }
+                    for (var i = 0; i < list_products.length; i++) {
+                        list_products[i].price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(list_products[i].price);
+                    }
                     Product.count({}, function(err, count) {
-                        console.log("Number of users: ", count);
                         let pages_number = [1];
                         let page_size = Math.ceil(count / 6);
                         for (let index = 2; index <= page_size; index++) {
@@ -74,8 +75,10 @@ exports.product_list = (req, res, next) => {
             Product.find({ cateId: category }).lean().skip(6 * page - 6).limit(6)
                 .exec(function(err, list_products) {
                     if (err) { return next(err) }
+                    for (var i = 0; i < list_products.length; i++) {
+                        list_products[i].price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(list_products[i].price);
+                    }
                     Product.count({ cateId: category }, function(err, count) {
-                        console.log("Number of users: ", count);
                         let pages_number = [1];
                         let page_size = Math.ceil(count / 6);
                         for (let index = 2; index <= page_size; index++) {
@@ -101,8 +104,10 @@ exports.product_list = (req, res, next) => {
             Product.find({}).lean().skip(6 * page - 6).limit(6)
                 .exec(function(err, list_products) {
                     if (err) { return next(err) }
+                    for (var i = 0; i < list_products.length; i++) {
+                        list_products[i].price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(list_products[i].price);
+                    }
                     Product.count({}, function(err, count) {
-                        console.log("Number of users: ", count);
                         let pages_number = [1];
                         let page_size = Math.ceil(count / 6);
                         for (let index = 2; index <= page_size; index++) {

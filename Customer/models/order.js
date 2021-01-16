@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var CartSchema = new Schema({
+var OrderSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', require: true },
     products: [{
         productId: { type: Schema.Types.ObjectId, ref: 'Product' },
@@ -11,6 +11,7 @@ var CartSchema = new Schema({
         price: { type: Number },
         total: { type: Number }
     }],
+    status: { type: String, max: 100, required: true },
     quantity: { type: Number },
     total: { type: Number }
 
@@ -19,4 +20,4 @@ var CartSchema = new Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Cart', CartSchema);
+module.exports = mongoose.model('Order', OrderSchema);

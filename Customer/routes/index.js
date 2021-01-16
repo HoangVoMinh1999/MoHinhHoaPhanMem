@@ -46,4 +46,6 @@ router.get('/checkout', checkoutController.checkout);
 
 router.get('/confirmation', checkoutController.confirmation);
 
+router.get('/order', checkoutController.order);
+
 module.exports = router;

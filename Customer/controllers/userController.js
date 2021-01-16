@@ -1,5 +1,4 @@
 var User = require('../models/user');
-var Role = require('../models/role');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -35,8 +34,6 @@ passport.use(new LocalStrategy({
                 function(err, cart) {
                     if (err) { return done(err); }
                     if (!cart) {
-                        var productId = "5f913b7ee28a1a763f8a2a1f"
-                        var number = 1;
                         var newCart = Cart({
                             userId: user._id
                         });
@@ -97,22 +94,19 @@ exports.postRegister = (req, res, next) => {
                     res.render('users/register', { title: 'Register', message: 'Wrong password !!!' });
                 } else {
                     var salt = bcrypt.genSaltSync(10);
-                    Role.find({}).exec(function(err, list_roles) {
-                        if (err) { return next(err) }
-                        user = new User({
-                            firstname: firstname,
-                            lastname: lastname,
-                            username: username,
-                            phone: phone,
-                            email: email,
-                            address: address,
-                            password: bcrypt.hashSync(password, salt),
-                            isDeleted: false,
-                            role: list_roles[2]
-                        });
-                        user.save(function(err, result) {});
-                        res.redirect('/login');
+                    user = new User({
+                        firstname: firstname,
+                        lastname: lastname,
+                        username: username,
+                        phone: phone,
+                        email: email,
+                        address: address,
+                        password: bcrypt.hashSync(password, salt),
+                        isDeleted: false,
+                        role: 2
                     });
+                    user.save(function(err, result) {});
+                    res.redirect('/login');
                 }
             }
         });

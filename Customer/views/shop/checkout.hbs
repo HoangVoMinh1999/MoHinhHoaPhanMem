@@ -21,48 +21,45 @@
 
                             <div class="col-md-6 form-group p_star">
                                  <label class="control-label">Họ</label>
-                                <input type="text" class="form-control" id="first" name="ho" required>
+                                <input type="text" class="form-control" id="first" name="ho" required value={{session.userSession.lastname}}>
                             </div>
 
                             <div class="col-md-6 form-group p_star">
                                  <label class="control-label">Tên đệm và tên</label>
-                                <input type="text" class="form-control" id="last" name="ten" required >
+                                <input type="text" class="form-control" id="last" name="ten" required value={{session.userSession.firstname}}>
                             </div>
 
                             <div class="col-md-6 form-group p_star">
                                  <label class="control-label">Số điện thoại</label>
-                                <input type="number" class="form-control" id="number" name="number" required>
+                                <input type="number" class="form-control" id="number" name="number" required value={{session.userSession.phone}}>
                             </div>
 
                             <div class="col-md-6 form-group p_star">
                                  <label class="control-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" required>
+                                <input type="text" class="form-control" id="email" name="email" required value={{session.userSession.email}}>
                             </div>
 
                             <div class="col-md-12 form-group p_star">
                                   <label class="control-label">Địa chỉ nhận hàng</label>
-                                <input type="text" class="form-control" id="add" name="add" required>
+                                <input type="text" class="form-control" id="add" name="add" required value={{session.userSession.address}}>
                          
                             </div>
                         
-                            <div class="col-md-12 form-group p_star">
-                               <label class="control-label">Thành phố</label>
-                                <input type="text" class="form-control" id="city" name="city" required>
-                            </div>
+                            
                     </div>
                     <div class="col-lg-4">
                         <div class="order_box">
                             <h2>Chi tiết đơn hàng</h2>
                             <ul class="list">
                                 <li><a >Sản phẩm <span>Giá</span></a></li>
-                                  {{# each products}}
+                                  {{#each session.cart.products}}
                                    
-                                <li><a >{{this.item.title}} <span class="middle">x {{this.sl}}</span>  <span class="last">${{this.tien}}</span></a></li>
-                                {{/ each}}
+                                <li><a >{{name}} <span class="middle">x {{quantity}}</span>  <span class="last">${{total}}</span></a></li>
+                                {{/each}}
                             </ul>
                             <ul class="list list_2">
                              
-                                <li><a>Tổng <span>${{Tien}}</span></a></li>
+                                <li><a>Tổng <span>${{session.cart.total}}</span></a></li>
                             </ul>
                 
                             <div class="creat_account">
