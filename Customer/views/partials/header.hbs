@@ -50,8 +50,8 @@
 	</div>
 	<div class="search_input" id="search_input_box">
 		<div class="container">
-			<form action="" method="post" class="d-flex justify-content-between">
-				<input type="text" class="form-control" id="find" name="find" placeholder="Search Here">
+			<form action="/search-product?search={{body.find}}" method="get" class="d-flex justify-content-between">
+				<input type="text" class="form-control" id="find" name="find" placeholder="Search Here" required>
 			</form>
 		</div>
 	</div>

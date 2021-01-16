@@ -157,3 +157,37 @@ exports.product_detail = (req, res, next) => {
     });
 
 };
+exports.search_product = (req, res, next) => {
+    let find = req.query.find;
+    let page = Number(req.query.page) || Number(1);
+    let category = req.query.category || "none";
+    console.log(find);
+    Product.find({ title: { "$regex": find, "$options": "i" } }).lean().skip(6 * page - 6).limit(6).exec(function(err, list_products) {
+        if (err) { return next(err) }
+        for (var i = 0; i < list_products.length; i++) {
+            list_products[i].price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(list_products[i].price);
+        }
+        Product.count({}, function(err, count) {
+            let pages_number = [1];
+            let page_size = Math.ceil(count / 6);
+            for (let index = 2; index <= page_size; index++) {
+                pages_number.push(index);
+            }
+            Category.find({}).lean().exec(function(err, list_categories) {
+                if (err) { return next(err) }
+                res.render('shop/search-product', {
+                    product_list: list_products,
+                    pagination_number: pages_number,
+                    last_page: page_size,
+                    category_list: list_categories,
+                    page: page,
+                    category: category,
+                    find: find
+                });
+            })
+
+        })
+
+    });
+
+}

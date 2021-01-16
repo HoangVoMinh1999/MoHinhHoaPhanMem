@@ -43,6 +43,8 @@ router.get('/product/:id', cartController.addproduct);
 
 router.get('/product/detail/:id/:quantity', cartController.adddetailproduct);
 
+router.get('/search-product', productController.search_product);
+
 router.get('/checkout', checkoutController.checkout);
 
 router.get('/confirmation', checkoutController.confirmation);
