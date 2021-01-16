@@ -21,10 +21,11 @@
 							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
 								aria-haspopup="true" aria-expanded="false">Tài khoản</a>
 							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="/profile">Thông tin tài khoản</a>
-								<li class="nav-item"><a class="nav-link" href="/order">Đơn hàng của tôi</a>
+								<li class="nav-item"><a class="nav-link" href="/profile">Thông tin tài khoản</a></li>
+								<li class="nav-item"><a class="nav-link" href="/order">Đơn hàng của tôi</a></li>
+								<li class="nav-item"><a class="nav-link" href="/wishlist">Danh sách yêu thích</a></li>
 								<li class="nav-item"><a class="nav-link" href="/logout">Đăng xuất</a></li>		
-								</li>
+								
 							</ul>
 						</li>
 
@@ -49,8 +50,8 @@
 		</nav>
 	</div>
 	<div class="search_input" id="search_input_box">
-		<div class="container">
-			<form action="/search-product?search={{body.find}}" method="get" class="d-flex justify-content-between">
+		<div class="container">	
+			<form action="/search-product" method="get" class="d-flex justify-content-between">
 				<input type="text" class="form-control" id="find" name="find" placeholder="Search Here" required>
 			</form>
 		</div>

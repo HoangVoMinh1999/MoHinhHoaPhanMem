@@ -55,4 +55,10 @@ router.get('/order-detail/:id', orderController.order_detail);
 
 router.get('/order-detail/cancel-order/:id', orderController.cancel_order);
 
+router.get('/wishlist', userController.wishlist);
+
+router.get('/add-wishlist/:id', userController.add_wishlist);
+
+router.get('/remove-wishlist/:id', userController.remove_wishlist);
+
 module.exports = router;

@@ -136,25 +136,35 @@ exports.product_list = (req, res, next) => {
 
 exports.product_detail = (req, res, next) => {
     var id = req.params.id;
-    async.parallel({
-        product: function(callback) {
-            Product.findById(id).lean()
-                .exec(callback);
-        }
-    }, function(err, results) {
+    var check = -1;
+    Product.findOne({ _id: id }).lean().exec(function(err, product) {
         if (err) { return next(err); }
-        if (results.product == null) {
+        if (product == null) {
             var err = new Error('Product not found');
             err.status = 404;
             return next(err);
+        } else {
+            if (req.session.userSession) {
+                let itemIndex = req.session.userSession.wishlist.findIndex(p => p.productId == id);
+                if (itemIndex > -1) {
+                    check = 1;
+                } else {
+                    check = 0;
+                }
+                Category.findById(product.cateId).lean().exec(function(err, cate) {
+                    if (err) { return next(err); }
+
+                    res.render('shop/detail', { title: 'Chi tiết sản phẩm', product: product, category: cate, check: check });
+                });
+            } else {
+                Category.findById(product.cateId).lean().exec(function(err, cate) {
+                    if (err) { return next(err); }
+
+                    res.render('shop/detail', { title: 'Chi tiết sản phẩm', product: product, category: cate, check: check });
+                });
+            }
         }
-        Category.findById(results.product.cateId).lean().exec(function(err, cate) {
-            if (err) { return next(err); }
-
-            res.render('shop/detail', { title: 'Chi tiết sản phẩm', product: results.product, category: cate });
-        });
-
-    });
+    })
 
 };
 exports.search_product = (req, res, next) => {

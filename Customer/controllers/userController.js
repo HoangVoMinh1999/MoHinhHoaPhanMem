@@ -3,6 +3,7 @@ var bcrypt = require('bcrypt');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Cart = require('../models/cart');
+var Product = require('../models/product');
 
 // login
 exports.login = (req, res, next) => {
@@ -157,4 +158,51 @@ exports.postchangepassword = (req, res, next) => {
             res.render('users/changepassword', { title: 'Change password', message: 'Not user' });
         }
     })
+}
+exports.wishlist = (req, res, next) => {
+    if (req.session.userSession) {
+
+        res.render('users/wishlist');
+    } else {
+        res.redirect('/login');
+    }
+}
+exports.add_wishlist = (req, res, next) => {
+    let id = req.params.id;
+    Product.findOne({ _id: id }, function(err, product) {
+        if (err) return next(err);
+        User.findOne({ _id: req.session.userSession._id }, function(err, user) {
+            if (err) return next(err);
+            let itemIndex = user.wishlist.findIndex(p => p.productId == id);
+            if (itemIndex > -1) {
+                res.redirect('back');
+            } else {
+                var productId = id;
+                user.wishlist.push({ productId });
+                req.session.userSession = user;
+                user.save();
+                res.redirect('back');
+            }
+        });
+    });
+}
+
+exports.remove_wishlist = (req, res, next) => {
+    let id = req.params.id;
+    Product.findOne({ _id: id }, function(err, product) {
+        if (err) return next(err);
+        User.findOne({ _id: req.session.userSession._id }, function(err, user) {
+            if (err) return next(err);
+            let itemIndex = user.wishlist.findIndex(p => p.productId == id);
+            if (itemIndex > -1) {
+                user.wishlist.splice(itemIndex, 1);
+                req.session.userSession = user;
+                user.save();
+                res.redirect('back');
+            } else {
+                res.redirect('back');
+
+            }
+        });
+    });
 }
