@@ -24,3 +24,20 @@ exports.category_list = (req, res, next) => {
         });
     })
 }
+exports.add_category = (req, res, next) => {
+    let name = req.body.name;
+    console.log(name);
+    Category.find({ name: name }, function(err, category) {
+        if (err) return next(err);
+        if (!category) {
+            console.log(category);
+            res.redirect('back');
+        } else {
+            let newCategory = new Category({
+                name: name
+            });
+            newCategory.save();
+            res.redirect('back');
+        }
+    })
+}

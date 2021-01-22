@@ -34,7 +34,33 @@
                 <div class="product-status-wrap">
                     <h4>Danh sách danh mục</h4>
                     <div class="add-product">
-                        <a href="/add-product">Thêm danh mục</a>
+                        <a data-toggle="modal" data-target="#addCategory">Thêm danh mục</a>
+                        <!-- Modal -->
+                        <!-- Modal -->
+                        <div class="modal fade" id="addCategory" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Thêm danh mục</h5>
+                                    </div>
+                                    <form action="/category-list/add-category" method="post">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input name="name" type="text" class="form-control"
+                                                    placeholder="Tên danh mục" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Đóng</button>
+                                            <button type="submit" class="btn btn-primary">Thêm</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <table>
                         <tr>
@@ -79,11 +105,15 @@
                     </table>
                     <div class="custom-pagination">
                         <ul class="pagination">
-                            <li style="{{isDisplayedPrevious currentPage 1}}" class="page-item"><a class="page-link" href="/category-list?page={{predictPage currentPage -1}}">Previous</a></li>
+                            <li style="{{isDisplayedPrevious currentPage 1}}" class="page-item"><a class="page-link"
+                                    href="/category-list?page={{predictPage currentPage -1}}">Previous</a></li>
                             {{#each page_number}}
-                            <li style="{{isCurrentPage ../currentPage this}}" class="page-item"><a class="page-link" href="/category-list?page={{this}}">{{this}}</a></li>
+                            <li style="{{isCurrentPage ../currentPage this}}" class="page-item"><a class="page-link"
+                                    href="/category-list?page={{this}}">{{this}}</a></li>
                             {{/each}}
-                            <li style="{{isDisplayedNext currentPage page_number.length}}" class="page-item"><a class="page-link" href="/category-list?page={{predictPage currentPage 1}}">Next</a></li>
+                            <li style="{{isDisplayedNext currentPage page_number.length}}" class="page-item"><a
+                                    class="page-link" href="/category-list?page={{predictPage currentPage 1}}">Next</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

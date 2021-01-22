@@ -33,4 +33,6 @@ router.get('/edit-product', ProductController.EditProduct);
 
 
 router.get('/category-list', categoryController.category_list);
+
+router.post('/category-list/add-category', categoryController.add_category);
 module.exports = router;
