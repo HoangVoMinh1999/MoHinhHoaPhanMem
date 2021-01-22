@@ -1,0 +1,93 @@
+<!-- Mobile Menu end -->
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-icon">
+                                    <i class="icon nalika-home"></i>
+                                </div>
+                                <div class="breadcomb-ctn">
+                                    <h2>Danh mục</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="breadcomb-report">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Mobile Menu end -->
+<div class="product-status mg-b-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap">
+                    <h4>Danh sách danh mục</h4>
+                    <div class="add-product">
+                        <a href="/add-product">Thêm danh mục</a>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên</th>
+                            <th>Cài đặt</th>
+                        </tr>
+                        {{#each listCategoriesInOnePage}}
+                        <tr>
+                            <td>{{number}}</td>
+                            <td>{{name}}</td>
+                            <td>
+                                <button data-toggle="modal" title="Trash" class="pd-setting-ed"
+                                    data-target="#exampleModalCenter"><i class="fa fa-trash-o"
+                                        aria-hidden="true"></i></button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document"
+                                        style="color: black;">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Thông báo</h5>
+                                            </div>
+                                            <div class="text-dark modal-body">
+                                                <p>Bạn có chắc chắn muốn xóa sản phẩm không?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="/product-list" method="post">
+                                                    <button type="submit" class="btn btn-primary" name="_id"
+                                                        value="{{this._id}}">Yes</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">No</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                    <div class="custom-pagination">
+                        <ul class="pagination">
+                            <li style="{{isDisplayedPrevious currentPage 1}}" class="page-item"><a class="page-link" href="/category-list?page={{predictPage currentPage -1}}">Previous</a></li>
+                            {{#each page_number}}
+                            <li style="{{isCurrentPage ../currentPage this}}" class="page-item"><a class="page-link" href="/category-list?page={{this}}">{{this}}</a></li>
+                            {{/each}}
+                            <li style="{{isDisplayedNext currentPage page_number.length}}" class="page-item"><a class="page-link" href="/category-list?page={{predictPage currentPage 1}}">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
