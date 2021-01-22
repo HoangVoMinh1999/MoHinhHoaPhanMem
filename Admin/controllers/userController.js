@@ -25,6 +25,21 @@ exports.customer_list = (req, res, next) => {
     });
 }
 
+exports.lock_unlock_user = (req, res, next) => {
+    let id = req.params.id;
+    User.findOne({ _id: id }, function(err, user) {
+        if (user.isDeleted) {
+            user.isDeleted = false;
+            user.save();
+            res.redirect('back');
+        } else {
+            user.isDeleted = true;
+            user.save();
+            res.redirect('back');
+        }
+    })
+}
+
 exports.staff_list = (req, res, next) => {
     let page = Number(req.query.page) || Number(1);
     User.find({ role: 1 }).lean().exec(function(err, list_user) {

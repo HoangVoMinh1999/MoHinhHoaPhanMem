@@ -46,5 +46,8 @@ router.get('/category-list/delete-category/:id', categoryController.delete_categ
 
 router.get('/customer-list', userController.customer_list);
 
+router.get('/customer-list/lock-unlock-user/:id', userController.lock_unlock_user);
+
 router.get('/staff-list', userController.staff_list);
+
 module.exports = router;

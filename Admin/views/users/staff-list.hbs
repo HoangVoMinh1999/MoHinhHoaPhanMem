@@ -80,8 +80,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{#if isDeleted}}
                                 <button data-toggle="modal" title="Trash" class="pd-setting-ed"
-                                    data-target="#deleteCategory{{_id}}"><i class="fa fa-trash-o"
+                                    data-target="#deleteCategory{{_id}}"><i class="fa fa-lock"
                                         aria-hidden="true"></i></button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="deleteCategory{{_id}}" tabindex="-1" role="dialog"
@@ -93,17 +94,43 @@
                                                 <h5 class="modal-title" id="exampleModalLongTitle">Thông báo</h5>
                                             </div>
                                             <div class="text-dark modal-body">
-                                                <p>Bạn có chắc chắn muốn chặn người dùng {{username}} không?</p>
+                                                <p>Bạn có chắc chắn muốn mở chặn nhân viên {{username}} không?</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Đóng</button>
-                                                <a href="/category-list/delete-category/{{_id}}"><button type="button"
-                                                        class="btn btn-primary">Xoá</button></a>
+                                                <a href="/customer-list/lock-unlock-user/{{_id}}"><button type="button"
+                                                        class="btn btn-primary">Mở chặn</button></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {{else}}
+                                <button data-toggle="modal" title="Trash" class="pd-setting-ed"
+                                    data-target="#deleteCategory{{_id}}"><i class="fa fa-unlock"
+                                        aria-hidden="true"></i></button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="deleteCategory{{_id}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document"
+                                        style="color: black;">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Thông báo</h5>
+                                            </div>
+                                            <div class="text-dark modal-body">
+                                                <p>Bạn có chắc chắn muốn chặn nhân viên {{username}} không?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Đóng</button>
+                                                <a href="/customer-list/lock-unlock-user/{{_id}}"><button type="button"
+                                                        class="btn btn-primary">Chặn</button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/if}}
                             </td>
                         </tr>
                         {{/each}}
