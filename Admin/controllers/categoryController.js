@@ -1,8 +1,9 @@
 var Category = require('../models/Category');
+var Product = require('../models/pro');
 
 exports.category_list = (req, res, next) => {
     let page = Number(req.query.page) || Number(1);
-    Category.find({}).lean().exec(function(err, list_categories) {
+    Category.find({ status: 1 }).lean().exec(function(err, list_categories) {
         if (err) return next(err);
         var listCategoriesInOnePage = [],
             page_number = [];
@@ -44,7 +45,7 @@ exports.add_category = (req, res, next) => {
 exports.edit_category = (req, res, next) => {
     let id = req.params.id;
     let name = req.body.name;
-    Category.findOne({ _id: id }, function(err, category) {
+    Category.findOne({ status: 1, _id: id }, function(err, category) {
         if (!category) {
             res.redirect('back');
         } else {
@@ -53,4 +54,23 @@ exports.edit_category = (req, res, next) => {
             res.redirect('back');
         }
     })
+}
+exports.delete_category = (req, res, next) => {
+    let id = req.params.id;
+    Product.countDocuments({ cateId: id }, function(err, count) {
+        console.log(count);
+        if (count < 1) {
+            Category.findOne({ _id: id }, function(err, category) {
+                if (!category) {
+                    res.redirect('back');
+                } else {
+                    category.status = 0;
+                    category.save();
+                    res.redirect('back');
+                }
+            });
+        } else {
+            res.redirect('back');
+        }
+    });
 }

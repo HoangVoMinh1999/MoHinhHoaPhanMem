@@ -80,7 +80,8 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel" style="color: black;">Chỉnh sửa danh mục</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel" style="color: black;">
+                                                    Chỉnh sửa danh mục</h5>
                                             </div>
                                             <form action="/category-list/edit-category/{{_id}}" method="post">
                                                 <div class="modal-body">
@@ -99,10 +100,10 @@
                                     </div>
                                 </div>
                                 <button data-toggle="modal" title="Trash" class="pd-setting-ed"
-                                    data-target="#exampleModalCenter"><i class="fa fa-trash-o"
+                                    data-target="#deleteCategory{{_id}}"><i class="fa fa-trash-o"
                                         aria-hidden="true"></i></button>
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="deleteCategory{{_id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document"
                                         style="color: black;">
@@ -111,15 +112,13 @@
                                                 <h5 class="modal-title" id="exampleModalLongTitle">Thông báo</h5>
                                             </div>
                                             <div class="text-dark modal-body">
-                                                <p>Bạn có chắc chắn muốn xóa sản phẩm không?</p>
+                                                <p>Bạn có chắc chắn muốn xóa danh mục {{name}} không?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="/product-list" method="post">
-                                                    <button type="submit" class="btn btn-primary" name="_id"
-                                                        value="{{this._id}}">Yes</button>
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">No</button>
-                                                </form>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Đóng</button>
+                                                <a href="/category-list/delete-category/{{_id}}"><button type="button"
+                                                        class="btn btn-primary">Xoá</button></a>
                                             </div>
                                         </div>
                                     </div>
