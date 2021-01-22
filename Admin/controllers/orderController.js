@@ -1,6 +1,7 @@
 const { resource } = require("../app")
 
 var Order = require('../models/order');
+const User = require("../models/User");
 
 exports.order_list = (req, res, next) => {
     let page = Number(req.query.page) || Number(1);
@@ -38,5 +39,21 @@ exports.change_status = (req, res, next) => {
             order.save();
             res.redirect('back');
         }
+    })
+}
+
+exports.order_detail = (req, res, next) => {
+    let id = req.params.id;
+    Order.findOne({ _id: id }, function(err, order) {
+        User.findOne({ _id: order.userId }, function(err, user) {
+            for (var i = 0; i < order.products.length; i++) {
+                order.products[i].price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.products[i].price);
+            }
+            res.render('orders/order-detail', {
+                order: order,
+                user: user,
+                layout: 'Index_Layout'
+            });
+        })
     })
 }

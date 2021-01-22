@@ -65,5 +65,7 @@ router.get('/order-list', orderController.order_list);
 
 router.get('/order-list/change-status/:id/:status', orderController.change_status);
 
+router.get('/order-list/order-detail/:id', orderController.order_detail);
+
 
 module.exports = router;

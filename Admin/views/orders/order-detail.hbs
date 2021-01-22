@@ -1,0 +1,92 @@
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-icon">
+                                    <i class="icon nalika-home"></i>
+                                </div>
+                                <div class="breadcomb-ctn">
+                                    <h2>Chi tiết đơn hàng</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="breadcomb-report">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="product-cart-area mg-b-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-cart-inner">
+                    <div id="example-basic">
+                        <h3>Chi tiết đơn hàng</h3>
+                        <section>
+                            <h3 class="product-cart-dn">Shopping</h3>
+                            <div class="product-list-cart">
+                                <div class="product-status-wrap border-pdt-ct">
+                                    <table>
+                                        <tr>
+                                            <th>Hình ảnh</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Số lượng</th>
+                                            <th>GIá</th>
+                                        </tr>
+                                        {{#each order.products}}
+                                        <tr>
+                                            <td><img src="{{imagePath}}" /></td>
+                                            <td>
+                                                <h3>{{name}}</h3>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" value="{{quantity}}" style="background-color: #1b2a47;" readonly>
+                                            </td>
+                                            <td>{{price}}</td>
+                                        </tr>
+                                        {{/each}}
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                        <h3>Thông tin khách hàng</h3>
+                        <section>
+                            <h3 class="product-cart-dn">Shopping</h3>
+                            <div class="product-delivary">
+                                <div class="form-group">
+                                    <label for="card-number" class="form-label">Tên</label>
+                                    <input id="name-2" name="name" type="text" class="form-control" value="{{user.firstname}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="card-number" class="form-label">Họ</label>
+                                    <input id="surname-2" name="surname" type="text" class="form-control" value="{{user.lastname}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="address" class="form-label">Địa chỉ</label>
+                                    <input id="address" name="address" type="text" class="form-control" value="{{user.address}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="city" class="form-label">Email</label>
+                                    <input id="city" name="city" type="email" class="form-control" value="{{user.email}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone-2" class="form-label">Số điện thoại</label>
+                                    <input id="phone-2" name="phone" type="number" class="form-control phone" value="{{user.phone}}">
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
