@@ -63,5 +63,7 @@ router.post('/staff-list/add-staff', userController.add_staff);
 
 router.get('/order-list', orderController.order_list);
 
+router.get('/order-list/change-status/:id/:status', orderController.change_status);
+
 
 module.exports = router;

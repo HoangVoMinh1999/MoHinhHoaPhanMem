@@ -5,7 +5,6 @@ var Order = require('../models/order');
 exports.order_list = (req, res, next) => {
     let page = Number(req.query.page) || Number(1);
     Order.find().lean().exec(function(err, list_order) {
-        console.log(list_order);
         if (err) return next(err);
         var listOrdersInOnePage = [],
             page_number = [];
@@ -26,5 +25,18 @@ exports.order_list = (req, res, next) => {
             layout: 'Index_Layout'
         });
     })
+}
 
+exports.change_status = (req, res, next) => {
+    let id = req.params.id;
+    let status = req.params.status;
+    Order.findOne({ _id: id }, function(err, order) {
+        if (!order) {
+            res.redirect('back');
+        } else {
+            order.status = status;
+            order.save();
+            res.redirect('back');
+        }
+    })
 }

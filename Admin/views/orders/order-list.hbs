@@ -50,11 +50,31 @@
                             <td>{{total}}</td>
                             <td>{{createdAt}}</td>
                             <td>
-                                <select style="background-color: #152036;">
-                                    <option value="1">{{status}}</option>
-                                    <option value="1">Đã xác nhận</option>
-                                    <option value="1">Đang vận chuyển</option>
-                                    <option value="1">Đã thanh toán</option>
+                                <select id="status" style="background-color: #152036;"
+                                    onchange="window.location.href='order-list/change-status/'+'{{_id}}' +'/' + this.value">
+                                    {{#if (eq status 'Chờ xác nhận')}}
+                                    <option value="Chờ xác nhận" selected>Chờ xác nhận</option>
+                                    {{else}}
+                                    <option value="Chờ xác nhận">Chờ xác nhận</option>
+                                    {{/if}}
+
+                                    {{#if (eq status 'Đã xác nhận')}}
+                                    <option value="Đã xác nhận" selected>Đã xác nhận</option>
+                                    {{else}}
+                                    <option value="Đã xác nhận">Đã xác nhận</option>
+                                    {{/if}}
+
+                                    {{#if (eq status 'Đang vận chuyển')}}
+                                    <option value="Đang vận chuyển" selected>Đang vận chuyển</option>
+                                    {{else}}
+                                    <option value="Đang vận chuyển">Đang vận chuyển</option>
+                                    {{/if}}
+
+                                    {{#if (eq status 'Đã thanh toán')}}
+                                    <option value="Đã thanh toán" selected>Đã thanh toán</option>
+                                    {{else}}
+                                    <option value="Đã thanh toán">Đã thanh toán</option>
+                                    {{/if}}
                                 </select>
                             </td>
                         </tr>
