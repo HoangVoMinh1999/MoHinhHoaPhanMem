@@ -57,5 +57,7 @@ router.get('/staff-list/lock-unlock-user/:id', userController.lock_unlock_user);
 
 router.post('/staff-list/edit-staff/:id', userController.edit_user);
 
+router.post('/staff-list/add-staff', userController.add_staff);
+
 
 module.exports = router;

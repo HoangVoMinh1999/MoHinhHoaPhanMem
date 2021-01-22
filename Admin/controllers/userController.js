@@ -1,4 +1,5 @@
 var User = require('../models/User');
+var bcrypt = require('bcrypt');
 
 exports.customer_list = (req, res, next) => {
     let page = Number(req.query.page) || Number(1);
@@ -80,5 +81,37 @@ exports.staff_list = (req, res, next) => {
             listUserInOnePage: listUserInOnePage,
             layout: 'Index_Layout'
         });
+    })
+}
+
+exports.add_staff = (req, res, next) => {
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let username = req.body.username;
+    let email = req.body.email;
+    let password = '12345678'
+    User.findOne({ username: username }, function(err, user) {
+        if (!user) {
+            User.findOne({ email: email }, function(err, email_user) {
+                if (!email_user) {
+                    var salt = bcrypt.genSaltSync(10);
+                    user = new User({
+                        firstname: firstname,
+                        lastname: lastname,
+                        username: username,
+                        email: email,
+                        role: 1,
+                        isDeleted: false,
+                        password: bcrypt.hashSync(password, salt)
+                    });
+                    user.save();
+                    res.redirect('back');
+                } else {
+                    res.redirect('back');
+                }
+            })
+        } else {
+            res.redirect('back');
+        }
     })
 }
