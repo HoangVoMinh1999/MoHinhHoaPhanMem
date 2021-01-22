@@ -3,6 +3,8 @@ var router = express.Router();
 var ProductModels = require('../models/Product')
 var ProductController = require('../controllers/ProductController')
 var categoryController = require('../controllers/categoryController');
+var userController = require('../controllers/userController');
+const { route } = require('./users');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
@@ -39,4 +41,10 @@ router.post('/category-list/add-category', categoryController.add_category);
 router.post('/category-list/edit-category/:id', categoryController.edit_category);
 
 router.get('/category-list/delete-category/:id', categoryController.delete_category);
+
+/* customer */
+
+router.get('/customer-list', userController.customer_list);
+
+router.get('/staff-list', userController.staff_list);
 module.exports = router;

@@ -1,0 +1,51 @@
+var User = require('../models/User');
+
+exports.customer_list = (req, res, next) => {
+    let page = Number(req.query.page) || Number(1);
+    User.find({ role: 2 }).lean().exec(function(err, list_user) {
+        if (err) return next(err);
+        var listCustomerInOnePage = [],
+            page_number = [];
+        for (let i = 0; i < list_user.length; i++) {
+            if (Math.floor(i / 4) == page - 1) {
+                var data = list_user[i];
+                data['number'] = i + 1;
+                listCustomerInOnePage.push(data);
+            }
+            if (i / 4 == Math.floor(i / 4)) {
+                page_number.push((i / 4) + 1);
+            }
+        }
+        res.render('users/customer-list', {
+            currentPage: page,
+            page_number: page_number,
+            listCustomerInOnePage: listCustomerInOnePage,
+            layout: 'Index_Layout'
+        });
+    });
+}
+
+exports.staff_list = (req, res, next) => {
+    let page = Number(req.query.page) || Number(1);
+    User.find({ role: 1 }).lean().exec(function(err, list_user) {
+        if (err) return next(err);
+        var listUserInOnePage = [],
+            page_number = [];
+        for (let i = 0; i < list_user.length; i++) {
+            if (Math.floor(i / 4) == page - 1) {
+                var data = list_user[i];
+                data['number'] = i + 1;
+                listUserInOnePage.push(data);
+            }
+            if (i / 4 == Math.floor(i / 4)) {
+                page_number.push((i / 4) + 1);
+            }
+        }
+        res.render('users/staff-list', {
+            currentPage: page,
+            page_number: page_number,
+            listUserInOnePage: listUserInOnePage,
+            layout: 'Index_Layout'
+        });
+    })
+}
