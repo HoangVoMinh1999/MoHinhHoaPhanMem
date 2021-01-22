@@ -4,7 +4,7 @@ var ProductModels = require('../models/Product')
 var ProductController = require('../controllers/ProductController')
 var categoryController = require('../controllers/categoryController');
 var userController = require('../controllers/userController');
-const { route } = require('./users');
+var orderController = require('../controllers/orderController');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
@@ -58,6 +58,10 @@ router.get('/staff-list/lock-unlock-user/:id', userController.lock_unlock_user);
 router.post('/staff-list/edit-staff/:id', userController.edit_user);
 
 router.post('/staff-list/add-staff', userController.add_staff);
+
+/* order */
+
+router.get('/order-list', orderController.order_list);
 
 
 module.exports = router;

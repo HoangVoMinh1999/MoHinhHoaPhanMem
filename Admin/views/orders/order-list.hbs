@@ -1,0 +1,80 @@
+<!-- Mobile Menu end -->
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-icon">
+                                    <i class="icon nalika-home"></i>
+                                </div>
+                                <div class="breadcomb-ctn">
+                                    <h2>Quản lý đơn hàng</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="breadcomb-report">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Mobile Menu end -->
+<div class="product-status mg-b-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap">
+                    <h4>Danh sách đơn hàng</h4>
+                    <table>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Số lượng</th>
+                            <th>Tổng thanh toán</th>
+                            <th>Ngày tạo</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                        {{#each listOrdersInOnePage}}
+                        <tr>
+                            <td>{{number}}</td>
+                            <td><a href="#">{{_id}}</a></td>
+                            <td>{{quantity}}</td>
+                            <td>{{total}}</td>
+                            <td>{{createdAt}}</td>
+                            <td>
+                                <select style="background-color: #152036;">
+                                    <option value="1">{{status}}</option>
+                                    <option value="1">Đã xác nhận</option>
+                                    <option value="1">Đang vận chuyển</option>
+                                    <option value="1">Đã thanh toán</option>
+                                </select>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                    <div class="custom-pagination">
+                        <ul class="pagination">
+                            <li style="{{isDisplayedPrevious currentPage 1}}" class="page-item"><a class="page-link"
+                                    href="/category-list?page={{predictPage currentPage -1}}">Previous</a></li>
+                            {{#each page_number}}
+                            <li style="{{isCurrentPage ../currentPage this}}" class="page-item"><a class="page-link"
+                                    href="/category-list?page={{this}}">{{this}}</a></li>
+                            {{/each}}
+                            <li style="{{isDisplayedNext currentPage page_number.length}}" class="page-item"><a
+                                    class="page-link" href="/category-list?page={{predictPage currentPage 1}}">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
