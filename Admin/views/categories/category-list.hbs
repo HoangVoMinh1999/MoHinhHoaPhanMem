@@ -36,7 +36,6 @@
                     <div class="add-product">
                         <a data-toggle="modal" data-target="#addCategory">Thêm danh mục</a>
                         <!-- Modal -->
-                        <!-- Modal -->
                         <div class="modal fade" id="addCategory" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -57,7 +56,6 @@
                                             <button type="submit" class="btn btn-primary">Thêm</button>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
@@ -73,6 +71,33 @@
                             <td>{{number}}</td>
                             <td>{{name}}</td>
                             <td>
+                                <button data-toggle="modal" data-target="#editCategory{{_id}}" title="Edit"
+                                    class="pd-setting-ed"><i class="fa fa-pencil-square-o"
+                                        aria-hidden="true"></i></button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="editCategory{{_id}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel" style="color: black;">Chỉnh sửa danh mục</h5>
+                                            </div>
+                                            <form action="/category-list/edit-category/{{_id}}" method="post">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <input name="name" type="text" class="form-control"
+                                                            placeholder="Tên danh mục" required value="{{name}}">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Đóng</button>
+                                                    <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                                 <button data-toggle="modal" title="Trash" class="pd-setting-ed"
                                     data-target="#exampleModalCenter"><i class="fa fa-trash-o"
                                         aria-hidden="true"></i></button>

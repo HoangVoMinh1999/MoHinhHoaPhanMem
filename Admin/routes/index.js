@@ -31,8 +31,10 @@ router.post('/add-product', ProductController.InsertNewProduct)
 
 router.get('/edit-product', ProductController.EditProduct);
 
-
+/* category */
 router.get('/category-list', categoryController.category_list);
 
 router.post('/category-list/add-category', categoryController.add_category);
+
+router.post('/category-list/edit-category/:id', categoryController.edit_category);
 module.exports = router;

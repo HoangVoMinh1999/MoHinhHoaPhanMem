@@ -41,3 +41,16 @@ exports.add_category = (req, res, next) => {
         }
     })
 }
+exports.edit_category = (req, res, next) => {
+    let id = req.params.id;
+    let name = req.body.name;
+    Category.findOne({ _id: id }, function(err, category) {
+        if (!category) {
+            res.redirect('back');
+        } else {
+            category.name = name;
+            category.save();
+            res.redirect('back');
+        }
+    })
+}
