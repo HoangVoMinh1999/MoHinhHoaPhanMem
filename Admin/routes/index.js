@@ -48,6 +48,14 @@ router.get('/customer-list', userController.customer_list);
 
 router.get('/customer-list/lock-unlock-user/:id', userController.lock_unlock_user);
 
+router.post('/customer-list/edit-customer/:id', userController.edit_user);
+
+/* staff */
 router.get('/staff-list', userController.staff_list);
+
+router.get('/staff-list/lock-unlock-user/:id', userController.lock_unlock_user);
+
+router.post('/staff-list/edit-staff/:id', userController.edit_user);
+
 
 module.exports = router;

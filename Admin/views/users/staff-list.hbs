@@ -41,6 +41,7 @@
                             <th>Tên</th>
                             <th>Email</th>
                             <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
                             <th>Cài đặt</th>
                         </tr>
                         {{#each listUserInOnePage}}
@@ -51,12 +52,13 @@
                             <td>{{firstname}}</td>
                             <td>{{email}}</td>
                             <td>{{phone}}</td>
+                            <td>{{address}}</td>
                             <td>
-                                <button data-toggle="modal" data-target="#editCustomer{{_id}}" title="Edit"
+                                <button data-toggle="modal" data-target="#editStaff{{_id}}" title="Edit"
                                     class="pd-setting-ed"><i class="fa fa-pencil-square-o"
                                         aria-hidden="true"></i></button>
                                 <!-- Modal -->
-                                <div class="modal fade" id="editCustomer{{_id}}" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="editStaff{{_id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -64,16 +66,27 @@
                                                 <h5 class="modal-title" id="exampleModalLabel" style="color: black;">
                                                     Chỉnh sửa thông tin</h5>
                                             </div>
-                                            <form action="/category-list/edit-category/{{_id}}" method="post">
+                                            <form action="/staff-list/edit-staff/{{_id}}" method="post">
                                                 <div class="modal-body">
+                                                    <label style="color: black;">Tên</label>
                                                     <div class="form-group">
-                                                        <input name="name" type="text" class="form-control"
-                                                            placeholder="Tên danh mục" required value="{{name}}">
+                                                        <input name="firstname" type="text" class="form-control"
+                                                            required value="{{firstname}}">
+                                                    </div>
+                                                    <label style="color: black;">Họ</label>
+                                                    <div class="form-group">
+                                                        <input name="lastname" type="text" class="form-control" required
+                                                            value="{{lastname}}">
+                                                    </div>
+                                                    <label style="color: black;">Địa chỉ</label>
+                                                    <div class="form-group">
+                                                        <input name="address" type="text" class="form-control" required
+                                                            value="{{address}}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Đóng</button>
+                                                        data-dismiss="modal" style="color: black;">Đóng</button>
                                                     <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
                                                 </div>
                                             </form>
@@ -82,10 +95,10 @@
                                 </div>
                                 {{#if isDeleted}}
                                 <button data-toggle="modal" title="Trash" class="pd-setting-ed"
-                                    data-target="#deleteCategory{{_id}}"><i class="fa fa-lock"
+                                    data-target="#unlockUser{{_id}}"><i class="fa fa-lock"
                                         aria-hidden="true"></i></button>
                                 <!-- Modal -->
-                                <div class="modal fade" id="deleteCategory{{_id}}" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="unlockUser{{_id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document"
                                         style="color: black;">
@@ -107,10 +120,10 @@
                                 </div>
                                 {{else}}
                                 <button data-toggle="modal" title="Trash" class="pd-setting-ed"
-                                    data-target="#deleteCategory{{_id}}"><i class="fa fa-unlock"
+                                    data-target="#lockUser{{_id}}"><i class="fa fa-unlock"
                                         aria-hidden="true"></i></button>
                                 <!-- Modal -->
-                                <div class="modal fade" id="deleteCategory{{_id}}" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="lockUser{{_id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document"
                                         style="color: black;">

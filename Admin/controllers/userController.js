@@ -40,6 +40,24 @@ exports.lock_unlock_user = (req, res, next) => {
     })
 }
 
+exports.edit_user = (req, res, next) => {
+    let id = req.params.id;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let address = req.body.address;
+    User.findOne({ _id: id }, function(err, user) {
+        if (!user) {
+            res.redirect('back');
+        } else {
+            user.firstname = firstname;
+            user.lastname = lastname;
+            user.address = address;
+            user.save();
+            res.redirect('back');
+        }
+    })
+}
+
 exports.staff_list = (req, res, next) => {
     let page = Number(req.query.page) || Number(1);
     User.find({ role: 1 }).lean().exec(function(err, list_user) {
