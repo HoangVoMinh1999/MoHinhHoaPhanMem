@@ -5,19 +5,15 @@ var ProductController = require('../controllers/ProductController')
 var categoryController = require('../controllers/categoryController');
 var userController = require('../controllers/userController');
 var orderController = require('../controllers/orderController');
+var adminController = require('../controllers/adminController');
 
 /* GET home page. */
-router.post('/', function(req, res, next) {
-    res.render('index', { title: 'Index', layout: "Index_Layout" });
-});
 
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Index', layout: "Index_Layout" });
-});
+router.get('/', adminController.index);
 
-router.get('/login', function(req, res, next) {
-    res.render('login', { title: 'Login', layout: 'Login_Layout' });
-});
+router.get('/login', adminController.login);
+
+router.post('/login', adminController.userLogin);
 //#region  Product
 router.get('/product-list', ProductController.ShowProducts);
 
